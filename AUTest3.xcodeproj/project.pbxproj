@@ -13,7 +13,37 @@
 		29B1C6321F2463DF00A3C514 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29B1C6311F2463DF00A3C514 /* Assets.xcassets */; };
 		29B1C6351F2463DF00A3C514 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29B1C6331F2463DF00A3C514 /* LaunchScreen.storyboard */; };
 		29B1C6381F2463DF00A3C514 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6371F2463DF00A3C514 /* main.m */; };
+		29B1C6461F24640200A3C514 /* MyAudioUnit3.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6451F24640200A3C514 /* MyAudioUnit3.m */; };
+		29B1C6491F24640200A3C514 /* AudioUnitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6481F24640200A3C514 /* AudioUnitViewController.m */; };
+		29B1C64C1F24640200A3C514 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29B1C64A1F24640200A3C514 /* MainInterface.storyboard */; };
+		29B1C6501F24640200A3C514 /* MyAudioUnit3.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 29B1C6421F24640200A3C514 /* MyAudioUnit3.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		29B1C6571F2466F900A3C514 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6561F2466F900A3C514 /* AudioEngine.m */; };
+		29B1C6581F24699300A3C514 /* MyAudioUnit3.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6451F24640200A3C514 /* MyAudioUnit3.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		29B1C64E1F24640200A3C514 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B1C61D1F2463DF00A3C514 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 29B1C6411F24640200A3C514;
+			remoteInfo = MyAudioUnit3;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		29B1C6541F24640200A3C514 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				29B1C6501F24640200A3C514 /* MyAudioUnit3.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		29B1C6251F2463DF00A3C514 /* AUTest3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AUTest3.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,10 +56,26 @@
 		29B1C6341F2463DF00A3C514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		29B1C6361F2463DF00A3C514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29B1C6371F2463DF00A3C514 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B1C6421F24640200A3C514 /* MyAudioUnit3.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyAudioUnit3.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		29B1C6441F24640200A3C514 /* MyAudioUnit3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAudioUnit3.h; sourceTree = "<group>"; };
+		29B1C6451F24640200A3C514 /* MyAudioUnit3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAudioUnit3.m; sourceTree = "<group>"; };
+		29B1C6471F24640200A3C514 /* AudioUnitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitViewController.h; sourceTree = "<group>"; };
+		29B1C6481F24640200A3C514 /* AudioUnitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitViewController.m; sourceTree = "<group>"; };
+		29B1C64B1F24640200A3C514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		29B1C64D1F24640200A3C514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29B1C6551F2466F900A3C514 /* AudioEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioEngine.h; sourceTree = "<group>"; };
+		29B1C6561F2466F900A3C514 /* AudioEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioEngine.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		29B1C6221F2463DF00A3C514 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29B1C63F1F24640200A3C514 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -43,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				29B1C6271F2463DF00A3C514 /* AUTest3 */,
+				29B1C6431F24640200A3C514 /* MyAudioUnit3 */,
 				29B1C6261F2463DF00A3C514 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				29B1C6251F2463DF00A3C514 /* AUTest3.app */,
+				29B1C6421F24640200A3C514 /* MyAudioUnit3.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,8 +115,23 @@
 				29B1C6331F2463DF00A3C514 /* LaunchScreen.storyboard */,
 				29B1C6361F2463DF00A3C514 /* Info.plist */,
 				29B1C6371F2463DF00A3C514 /* main.m */,
+				29B1C6551F2466F900A3C514 /* AudioEngine.h */,
+				29B1C6561F2466F900A3C514 /* AudioEngine.m */,
 			);
 			path = AUTest3;
+			sourceTree = "<group>";
+		};
+		29B1C6431F24640200A3C514 /* MyAudioUnit3 */ = {
+			isa = PBXGroup;
+			children = (
+				29B1C6441F24640200A3C514 /* MyAudioUnit3.h */,
+				29B1C6451F24640200A3C514 /* MyAudioUnit3.m */,
+				29B1C6471F24640200A3C514 /* AudioUnitViewController.h */,
+				29B1C6481F24640200A3C514 /* AudioUnitViewController.m */,
+				29B1C64A1F24640200A3C514 /* MainInterface.storyboard */,
+				29B1C64D1F24640200A3C514 /* Info.plist */,
+			);
+			path = MyAudioUnit3;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -81,15 +144,34 @@
 				29B1C6211F2463DF00A3C514 /* Sources */,
 				29B1C6221F2463DF00A3C514 /* Frameworks */,
 				29B1C6231F2463DF00A3C514 /* Resources */,
+				29B1C6541F24640200A3C514 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				29B1C64F1F24640200A3C514 /* PBXTargetDependency */,
 			);
 			name = AUTest3;
 			productName = AUTest3;
 			productReference = 29B1C6251F2463DF00A3C514 /* AUTest3.app */;
 			productType = "com.apple.product-type.application";
+		};
+		29B1C6411F24640200A3C514 /* MyAudioUnit3 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29B1C6511F24640200A3C514 /* Build configuration list for PBXNativeTarget "MyAudioUnit3" */;
+			buildPhases = (
+				29B1C63E1F24640200A3C514 /* Sources */,
+				29B1C63F1F24640200A3C514 /* Frameworks */,
+				29B1C6401F24640200A3C514 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyAudioUnit3;
+			productName = MyAudioUnit3;
+			productReference = 29B1C6421F24640200A3C514 /* MyAudioUnit3.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -101,6 +183,9 @@
 				ORGANIZATIONNAME = "Alexander Bollbach";
 				TargetAttributes = {
 					29B1C6241F2463DF00A3C514 = {
+						CreatedOnToolsVersion = 9.0;
+					};
+					29B1C6411F24640200A3C514 = {
 						CreatedOnToolsVersion = 9.0;
 					};
 				};
@@ -119,6 +204,7 @@
 			projectRoot = "";
 			targets = (
 				29B1C6241F2463DF00A3C514 /* AUTest3 */,
+				29B1C6411F24640200A3C514 /* MyAudioUnit3 */,
 			);
 		};
 /* End PBXProject section */
@@ -134,6 +220,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		29B1C6401F24640200A3C514 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29B1C64C1F24640200A3C514 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -141,13 +235,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29B1C6571F2466F900A3C514 /* AudioEngine.m in Sources */,
+				29B1C6581F24699300A3C514 /* MyAudioUnit3.m in Sources */,
 				29B1C62D1F2463DF00A3C514 /* ViewController.m in Sources */,
 				29B1C6381F2463DF00A3C514 /* main.m in Sources */,
 				29B1C62A1F2463DF00A3C514 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		29B1C63E1F24640200A3C514 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29B1C6461F24640200A3C514 /* MyAudioUnit3.m in Sources */,
+				29B1C6491F24640200A3C514 /* AudioUnitViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		29B1C64F1F24640200A3C514 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 29B1C6411F24640200A3C514 /* MyAudioUnit3 */;
+			targetProxy = 29B1C64E1F24640200A3C514 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		29B1C62E1F2463DF00A3C514 /* Main.storyboard */ = {
@@ -164,6 +277,14 @@
 				29B1C6341F2463DF00A3C514 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		29B1C64A1F24640200A3C514 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29B1C64B1F24640200A3C514 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -299,6 +420,32 @@
 			};
 			name = Release;
 		};
+		29B1C6521F24640200A3C514 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 5UR7SPRNP3;
+				INFOPLIST_FILE = MyAudioUnit3/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.org.me.AUTest3.MyAudioUnit3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		29B1C6531F24640200A3C514 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 5UR7SPRNP3;
+				INFOPLIST_FILE = MyAudioUnit3/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.org.me.AUTest3.MyAudioUnit3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -318,6 +465,16 @@
 				29B1C63D1F2463DF00A3C514 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		29B1C6511F24640200A3C514 /* Build configuration list for PBXNativeTarget "MyAudioUnit3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29B1C6521F24640200A3C514 /* Debug */,
+				29B1C6531F24640200A3C514 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
