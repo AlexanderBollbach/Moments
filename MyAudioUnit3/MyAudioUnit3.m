@@ -20,7 +20,7 @@ typedef struct FreqParam {
 @end
 
 @implementation MyAudioUnit3 {
-    float * freqTest;
+    float freqTest;
 }
 @synthesize parameterTree = _parameterTree;
 
@@ -43,9 +43,8 @@ const AudioUnitParameterID frequencyAddress = 0;
     freqParam->value = 200;
     
     self.freqParam = freqParam;
-    
-    float a = 22;
-    freqTest = &a;
+    freqTest = 3.0;
+  
     
     
     
@@ -68,7 +67,7 @@ const AudioUnitParameterID frequencyAddress = 0;
     _parameterTree = [AUParameterTree createTreeWithChildren:@[ param1 ]];
 
     
-    __block float * freqVal = freqTest;
+//    __block float * freqVal = freqTest;
     
     _parameterTree.implementorValueProvider = ^(AUParameter *param) {
         
@@ -79,7 +78,7 @@ const AudioUnitParameterID frequencyAddress = 0;
         switch (param.address) {
             case frequencyAddress:
                 
-                return *freqVal;
+                return (AUValue)freqTest;
 //                return (AUValue)freqParam->value;
                 
             default:
@@ -95,11 +94,11 @@ const AudioUnitParameterID frequencyAddress = 0;
         FreqParam * freqParam = self.freqParam;
         MyAudioUnit3 * selfP = self;
         
-        *freqVal = 4;
+        
         
         switch (param.address) {
             case frequencyAddress:
-                *freqVal = value;
+                freqTest = value;
                 freqParam->value = value;
                 break;
             default:
@@ -152,7 +151,7 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
     __block float phase = 0.0;
     
     
-    AUValue *frequencyCapture = freqTest;
+    AUValue * frequencyCapture = &freqTest;
 
     return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AVAudioFrameCount frameCount, NSInteger outputBusNumber, AudioBufferList *outputData, const AURenderEvent *realtimeEventListHead, AURenderPullInputBlock pullInputBlock) {
         
