@@ -7,6 +7,7 @@
 //
 
 #import "AudioEngine.h"
+#import "MyAudioUnit3.h"
 
 @interface AudioEngine() {
     AVAudioEngine *_engine;
@@ -36,19 +37,20 @@
 }
 
 - (void) setupAUWithComponentDescription:(AudioComponentDescription)componentDescription andCompletion:(completedAUSetup) completion name:(int)name {
-
+    
     [AVAudioUnit instantiateWithComponentDescription:componentDescription
                                              options:kAudioComponentInstantiation_LoadOutOfProcess
                                    completionHandler:^ (AVAudioUnit * __nullable unit, NSError * __nullable error) {
-         [_engine attachNode:unit];
-         
-         AVAudioFormat *stereoFormat = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:hardwareFormat.sampleRate channels:2];
-         [_engine connect:unit to:[_engine mainMixerNode] format:stereoFormat];
 
-         printf("name: %i pointer: %p \n", name, unit.AUAudioUnit);
-
-         completion(unit.AUAudioUnit);
-     }];
+                                       [_engine attachNode:unit];
+                                       
+                                       AVAudioFormat *stereoFormat = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:hardwareFormat.sampleRate channels:2];
+                                       [_engine connect:unit to:[_engine mainMixerNode] format:stereoFormat];
+                                       
+                                       
+                                       
+                                       completion(unit.AUAudioUnit);
+                                   }];
 }
 
 - (void)startEngine {

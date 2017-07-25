@@ -8,8 +8,7 @@
 
 #import <AudioToolbox/AudioToolbox.h>
 
-// Define parameter addresses.
-extern const AudioUnitParameterID myParam1;
+
 
 @interface MyAudioUnit3 : AUAudioUnit
 
