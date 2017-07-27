@@ -138,10 +138,11 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
     
     AudioBufferList const ** originalABLCapture = &originalAudioBufferList;
     
-    __block float time = 0.0;
+    __block float phase = 0.0;
     
     float deltaTime = 1.0 / 44100;
     
+    float SR = 44100;
     
     return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AVAudioFrameCount frameCount, NSInteger outputBusNumber, AudioBufferList *outputData, const AURenderEvent *realtimeEventListHead, AURenderPullInputBlock pullInputBlock) {
         
@@ -155,20 +156,26 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
         float* outR = (float*)outputData->mBuffers[1].mData;
         
         
-        float cyclesPerSec = *frequencyCapture;
+        float freq = *frequencyCapture;
+  
         
-        float tick = 0;
-        
-        
+        double phaseIncrement = 2 * M_PI * freq / SR;
+
         
         
         for (int frame = 0; frame < frameCount; frame++) {
      
-            double theta = cyclesPerSec * M_2_PI * time;
+            
    
-            float val = sin(theta);
+            float val = sin(phase);
 
-            time += deltaTime;
+            phase = phase + phaseIncrement;
+            
+            if (phase >= (2 * M_PI)) {
+                phase = phase - (2 * M_PI);
+            }
+
+
    
             
 
@@ -176,6 +183,8 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
             outR[frame] = val;
    
         }
+        
+
         
         
 //        printf("hit");
