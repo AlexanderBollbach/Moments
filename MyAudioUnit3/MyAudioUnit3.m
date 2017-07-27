@@ -103,7 +103,7 @@ const AudioUnitParameterID frequencyAddress = 0;
     
     if (![super allocateRenderResourcesAndReturnError:outError]) { return NO; }
     renderABL.mNumberBuffers = 2; // this is actually needed
-    pcmBuffer = [[AVAudioPCMBuffer alloc] initWithPCMFormat:_outputBus.format frameCapacity: 512];
+    pcmBuffer = [[AVAudioPCMBuffer alloc] initWithPCMFormat:_outputBus.format frameCapacity: 1024];
     originalAudioBufferList = pcmBuffer.audioBufferList;
     return YES;
 }
@@ -148,38 +148,34 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
         
         
         AudioBufferList const * oABL = *originalABLCapture;
-//        prepareOutputBufferList(outputData, frameCount, true, oABL);
+        prepareOutputBufferList(outputData, frameCount, true, oABL);
         
         // buffers
         float* outL = (float*)outputData->mBuffers[0].mData;
         float* outR = (float*)outputData->mBuffers[1].mData;
         
         
-        float freq = *frequencyCapture;
+        float cyclesPerSec = *frequencyCapture;
         
-        
+        float tick = 0;
         
         
         
         
         for (int frame = 0; frame < frameCount; frame++) {
      
-            
-            float theta = freq * M_2_PI * time;
-            
-//            printf("%f \n", theta);
-            
+            double theta = cyclesPerSec * M_2_PI * time;
+   
             float val = sin(theta);
-            
-//            printf("%f \n", val);
-            
-            
+
             time += deltaTime;
+   
+            
 
             outL[frame] = val;
             outR[frame] = val;
    
-        }x
+        }
         
         
 //        printf("hit");

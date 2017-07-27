@@ -23,7 +23,7 @@ class ABAudioEngine {
         
         hardwareFormat = audioEngine.outputNode.outputFormat(forBus: 0)
         audioEngine.connect(audioEngine.mainMixerNode, to: audioEngine.outputNode, format: hardwareFormat)
-        
+//        audioEngine.manualRenderingMaximumFrameCount = 256
         
         
         
@@ -88,7 +88,7 @@ class ABAudioEngine {
         
         AVAudioUnit.instantiate(with: desc, options: .loadOutOfProcess) { (unit, error) in
             guard error == nil else { fatalError("couldn't instantiate audio unit") }
-            unit?.auAudioUnit.maximumFramesToRender = 128
+            unit?.auAudioUnit.maximumFramesToRender = 256
             completed(unit!)
         }
     }

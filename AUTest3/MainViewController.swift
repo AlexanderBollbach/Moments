@@ -37,19 +37,17 @@ class MainViewController: UIViewController {
         pannedView?.center = recPoint
         
         let freqFromPosition = recPoint.x / self.view.frame.size.width * 2000
-
+        
         if let nodeView = pannedView as? NodeView {
             
             if let orb = self.orbs[nodeView.orbIdentifier] {
                 
-                print("freqfrompos: \(freqFromPosition)")
-                print("orb freq: \(orb.frequency)")
                 
-                print("here \n")
-                if abs(Double(freqFromPosition) - orb.frequency) > 10.0 {
-                print("there")
+//                DispatchQueue.main.async {
+                
                     self.engine.setFrequency(node: orb.node, value: Double(freqFromPosition))
-                }
+//                }
+                
                 
                 orb.frequency = Double(freqFromPosition)
                 
