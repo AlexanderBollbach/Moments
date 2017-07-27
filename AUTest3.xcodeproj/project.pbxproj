@@ -7,18 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		29B1C62A1F2463DF00A3C514 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6291F2463DF00A3C514 /* AppDelegate.m */; };
-		29B1C62D1F2463DF00A3C514 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C62C1F2463DF00A3C514 /* ViewController.m */; };
+		291DF21F1F294B28003A9BC4 /* ABAudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291DF21E1F294B28003A9BC4 /* ABAudioEngine.swift */; };
+		291DF2211F294D08003A9BC4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291DF2201F294D08003A9BC4 /* MainViewController.swift */; };
+		291DF2411F294D9D003A9BC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291DF2401F294D9D003A9BC4 /* AppDelegate.swift */; };
 		29B1C6301F2463DF00A3C514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29B1C62E1F2463DF00A3C514 /* Main.storyboard */; };
-		29B1C6321F2463DF00A3C514 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29B1C6311F2463DF00A3C514 /* Assets.xcassets */; };
-		29B1C6351F2463DF00A3C514 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29B1C6331F2463DF00A3C514 /* LaunchScreen.storyboard */; };
-		29B1C6381F2463DF00A3C514 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6371F2463DF00A3C514 /* main.m */; };
 		29B1C6461F24640200A3C514 /* MyAudioUnit3.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6451F24640200A3C514 /* MyAudioUnit3.m */; };
 		29B1C6491F24640200A3C514 /* AudioUnitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6481F24640200A3C514 /* AudioUnitViewController.m */; };
 		29B1C64C1F24640200A3C514 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29B1C64A1F24640200A3C514 /* MainInterface.storyboard */; };
 		29B1C6501F24640200A3C514 /* MyAudioUnit3.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 29B1C6421F24640200A3C514 /* MyAudioUnit3.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		29B1C6571F2466F900A3C514 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6561F2466F900A3C514 /* AudioEngine.m */; };
 		29B1C6581F24699300A3C514 /* MyAudioUnit3.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6451F24640200A3C514 /* MyAudioUnit3.m */; };
+		29E364101F295388004C44CB /* SoundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E3640F1F295388004C44CB /* SoundNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,16 +44,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		291DF21D1F294B28003A9BC4 /* AUTest3-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AUTest3-Bridging-Header.h"; sourceTree = "<group>"; };
+		291DF21E1F294B28003A9BC4 /* ABAudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABAudioEngine.swift; sourceTree = "<group>"; };
+		291DF2201F294D08003A9BC4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		291DF2401F294D9D003A9BC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29B1C6251F2463DF00A3C514 /* AUTest3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AUTest3.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		29B1C6281F2463DF00A3C514 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		29B1C6291F2463DF00A3C514 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		29B1C62B1F2463DF00A3C514 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		29B1C62C1F2463DF00A3C514 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		29B1C62F1F2463DF00A3C514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		29B1C6311F2463DF00A3C514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		29B1C6341F2463DF00A3C514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		29B1C6361F2463DF00A3C514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		29B1C6371F2463DF00A3C514 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B1C6421F24640200A3C514 /* MyAudioUnit3.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyAudioUnit3.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B1C6441F24640200A3C514 /* MyAudioUnit3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAudioUnit3.h; sourceTree = "<group>"; };
 		29B1C6451F24640200A3C514 /* MyAudioUnit3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAudioUnit3.m; sourceTree = "<group>"; };
@@ -63,8 +58,7 @@
 		29B1C6481F24640200A3C514 /* AudioUnitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitViewController.m; sourceTree = "<group>"; };
 		29B1C64B1F24640200A3C514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		29B1C64D1F24640200A3C514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		29B1C6551F2466F900A3C514 /* AudioEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioEngine.h; sourceTree = "<group>"; };
-		29B1C6561F2466F900A3C514 /* AudioEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioEngine.m; sourceTree = "<group>"; };
+		29E3640F1F295388004C44CB /* SoundNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +79,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		291DF2421F294E24003A9BC4 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				29B1C62E1F2463DF00A3C514 /* Main.storyboard */,
+				291DF21D1F294B28003A9BC4 /* AUTest3-Bridging-Header.h */,
+				29B1C6361F2463DF00A3C514 /* Info.plist */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
 		29B1C61C1F2463DF00A3C514 = {
 			isa = PBXGroup;
 			children = (
@@ -106,17 +110,11 @@
 		29B1C6271F2463DF00A3C514 /* AUTest3 */ = {
 			isa = PBXGroup;
 			children = (
-				29B1C6281F2463DF00A3C514 /* AppDelegate.h */,
-				29B1C6291F2463DF00A3C514 /* AppDelegate.m */,
-				29B1C62B1F2463DF00A3C514 /* ViewController.h */,
-				29B1C62C1F2463DF00A3C514 /* ViewController.m */,
-				29B1C62E1F2463DF00A3C514 /* Main.storyboard */,
-				29B1C6311F2463DF00A3C514 /* Assets.xcassets */,
-				29B1C6331F2463DF00A3C514 /* LaunchScreen.storyboard */,
-				29B1C6361F2463DF00A3C514 /* Info.plist */,
-				29B1C6371F2463DF00A3C514 /* main.m */,
-				29B1C6551F2466F900A3C514 /* AudioEngine.h */,
-				29B1C6561F2466F900A3C514 /* AudioEngine.m */,
+				291DF2421F294E24003A9BC4 /* Misc */,
+				291DF21E1F294B28003A9BC4 /* ABAudioEngine.swift */,
+				29E3640F1F295388004C44CB /* SoundNode.swift */,
+				291DF2201F294D08003A9BC4 /* MainViewController.swift */,
+				291DF2401F294D9D003A9BC4 /* AppDelegate.swift */,
 			);
 			path = AUTest3;
 			sourceTree = "<group>";
@@ -184,6 +182,7 @@
 				TargetAttributes = {
 					29B1C6241F2463DF00A3C514 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 					};
 					29B1C6411F24640200A3C514 = {
 						CreatedOnToolsVersion = 9.0;
@@ -214,8 +213,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29B1C6351F2463DF00A3C514 /* LaunchScreen.storyboard in Resources */,
-				29B1C6321F2463DF00A3C514 /* Assets.xcassets in Resources */,
 				29B1C6301F2463DF00A3C514 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,11 +232,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29B1C6571F2466F900A3C514 /* AudioEngine.m in Sources */,
+				291DF2411F294D9D003A9BC4 /* AppDelegate.swift in Sources */,
 				29B1C6581F24699300A3C514 /* MyAudioUnit3.m in Sources */,
-				29B1C62D1F2463DF00A3C514 /* ViewController.m in Sources */,
-				29B1C6381F2463DF00A3C514 /* main.m in Sources */,
-				29B1C62A1F2463DF00A3C514 /* AppDelegate.m in Sources */,
+				291DF2211F294D08003A9BC4 /* MainViewController.swift in Sources */,
+				29E364101F295388004C44CB /* SoundNode.swift in Sources */,
+				291DF21F1F294B28003A9BC4 /* ABAudioEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,14 +266,6 @@
 				29B1C62F1F2463DF00A3C514 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		29B1C6331F2463DF00A3C514 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				29B1C6341F2463DF00A3C514 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		29B1C64A1F24640200A3C514 /* MainInterface.storyboard */ = {
@@ -398,11 +387,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5UR7SPRNP3;
-				INFOPLIST_FILE = AUTest3/Info.plist;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 6UUR9483U2;
+				INFOPLIST_FILE = "$(SRCROOT)/AUTest3/Misc/Info.plist";
+				LD_NO_PIE = NO;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.org.me.AUTest3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AUTest3/Misc/AUTest3-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -411,11 +405,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5UR7SPRNP3;
-				INFOPLIST_FILE = AUTest3/Info.plist;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 6UUR9483U2;
+				INFOPLIST_FILE = "$(SRCROOT)/AUTest3/Misc/Info.plist";
+				LD_NO_PIE = NO;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.org.me.AUTest3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AUTest3/Misc/AUTest3-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -423,7 +421,7 @@
 		29B1C6521F24640200A3C514 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 5UR7SPRNP3;
+				DEVELOPMENT_TEAM = 6UUR9483U2;
 				INFOPLIST_FILE = MyAudioUnit3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.org.me.AUTest3.MyAudioUnit3;
@@ -436,7 +434,7 @@
 		29B1C6531F24640200A3C514 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 5UR7SPRNP3;
+				DEVELOPMENT_TEAM = 6UUR9483U2;
 				INFOPLIST_FILE = MyAudioUnit3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.org.me.AUTest3.MyAudioUnit3;

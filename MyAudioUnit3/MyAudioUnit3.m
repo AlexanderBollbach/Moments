@@ -9,45 +9,30 @@
 #import "MyAudioUnit3.h"
 #import <AVFoundation/AVFoundation.h>
 
-typedef struct FreqParam {
-    float value;
-} FreqParam;
-
 @interface MyAudioUnit3 ()
 @property (nonatomic, readwrite) AUParameterTree *parameterTree;
 @property AUAudioUnitBusArray *outputBusArray;
-@property (nonatomic, assign) FreqParam * freqParam;
 @end
 
 @implementation MyAudioUnit3 {
-    float freqTest;
+    float frequency;
+    AudioBufferList const * originalAudioBufferList;
+    AVAudioPCMBuffer* pcmBuffer;
+    AUAudioUnitBus *_outputBus;
+    AudioBufferList renderABL;
 }
 @synthesize parameterTree = _parameterTree;
 
-AudioBufferList renderABL;
-AUAudioUnitBus *_outputBus; // was BufferedInputBus in sample code
-AVAudioPCMBuffer* pcmBuffer;
 
 
-AudioBufferList const* originalAudioBufferList;
+
+
 const AudioUnitParameterID frequencyAddress = 0;
-
-
 
 - (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription options:(AudioComponentInstantiationOptions)options error:(NSError **)outError {
     self = [super initWithComponentDescription:componentDescription options:options error:outError];
     
     if (self == nil) { return nil; }
-    
-    FreqParam * freqParam = malloc(sizeof(FreqParam));
-    freqParam->value = 200;
-    
-    self.freqParam = freqParam;
-    freqTest = 3.0;
-  
-    
-    
-    
     
     AudioUnitParameterOptions flags = kAudioUnitParameterFlag_IsWritable |
     kAudioUnitParameterFlag_IsReadable;
@@ -57,62 +42,56 @@ const AudioUnitParameterID frequencyAddress = 0;
                                                                  address:frequencyAddress
                                                                      min:100
                                                                      max:1000
-                                                        unit:kAudioUnitParameterUnit_Hertz
+                                                                    unit:kAudioUnitParameterUnit_Hertz
                                                                 unitName:nil
                                                                    flags:flags
                                                             valueStrings:nil
                                                      dependentParameters:nil];
-    param1.value = 201;
+    param1.value = 500;
+    
+    
     
     _parameterTree = [AUParameterTree createTreeWithChildren:@[ param1 ]];
-
     
-//    __block float * freqVal = freqTest;
+    
+    
+    
+    __weak MyAudioUnit3 * weak = self;
     
     _parameterTree.implementorValueProvider = ^(AUParameter *param) {
         
-        MyAudioUnit3 * selfP = self;
-        
-        FreqParam * freqParam = self.freqParam;
+        __strong MyAudioUnit3 * strong = weak;
         
         switch (param.address) {
             case frequencyAddress:
-                
-                return (AUValue)freqTest;
-//                return (AUValue)freqParam->value;
-                
+                return (AUValue)strong->frequency;
             default:
                 return (AUValue) 0.0;
         }
     };
     
-
-    
-    
     _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
         
-        FreqParam * freqParam = self.freqParam;
-        MyAudioUnit3 * selfP = self;
-        
-        
+        __strong MyAudioUnit3 * strong = weak;
         
         switch (param.address) {
+                
             case frequencyAddress:
-                freqTest = value;
-                freqParam->value = value;
+                
+                strong->frequency = value;
                 break;
             default:
                 break;
         }
     };
     
-
+    
     AVAudioFormat *defaultFormat = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100.0 channels:2];
     
     _outputBus = [[AUAudioUnitBus alloc] initWithFormat:defaultFormat error:nil];
     _outputBusArray = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self busType:AUAudioUnitBusTypeOutput busses: @[_outputBus]];
     
-    self.maximumFramesToRender = 512;
+//    self.maximumFramesToRender = 512;
     
     return self;
 }
@@ -131,45 +110,79 @@ const AudioUnitParameterID frequencyAddress = 0;
 
 - (void)deallocateRenderResources { [super deallocateRenderResources]; }
 
-void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount frameCount, bool zeroFill) {
+void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount frameCount, bool zeroFill, AudioBufferList const * originalAudioBufferList) {
+    
     UInt32 byteSize = frameCount * sizeof(float);
-    for (UInt32 i = 0; i < outBufferList->mNumberBuffers; ++i) {
-        outBufferList->mBuffers[i].mNumberChannels = originalAudioBufferList->mBuffers[i].mNumberChannels;
-        outBufferList->mBuffers[i].mDataByteSize = byteSize;
+    
+    int numberOfOutputBuffers = outBufferList->mNumberBuffers;
+    
+    for (int i = 0; i < numberOfOutputBuffers; ++i) {
+        
+        outBufferList->mBuffers[i].mNumberChannels = originalAudioBufferList->mBuffers[i].mNumberChannels; // copies num channels
+        
+        outBufferList->mBuffers[i].mDataByteSize = byteSize; // and how many bytes
+        
         if (outBufferList->mBuffers[i].mData == NULL) {
             outBufferList->mBuffers[i].mData = originalAudioBufferList->mBuffers[i].mData;
         }
+        
         if (zeroFill) { memset(outBufferList->mBuffers[i].mData, 0, byteSize); }
     }
 }
 
 #pragma mark - AUAudioUnit (AUAudioUnitImplementation)
 - (AUInternalRenderBlock)internalRenderBlock {
-
-    FreqParam * freqParam = self.freqParam;
-
-    __block float phase = 0.0;
+    
+   
+    AUValue * frequencyCapture = &frequency;
+    
+    AudioBufferList const ** originalABLCapture = &originalAudioBufferList;
+    
+    __block float time = 0.0;
+    
+    float deltaTime = 1.0 / 44100;
     
     
-    AUValue * frequencyCapture = &freqTest;
-
     return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AVAudioFrameCount frameCount, NSInteger outputBusNumber, AudioBufferList *outputData, const AURenderEvent *realtimeEventListHead, AURenderPullInputBlock pullInputBlock) {
         
-        prepareOutputBufferList(outputData, frameCount, true);
-
+        
+        
+        AudioBufferList const * oABL = *originalABLCapture;
+//        prepareOutputBufferList(outputData, frameCount, true, oABL);
+        
+        // buffers
         float* outL = (float*)outputData->mBuffers[0].mData;
         float* outR = (float*)outputData->mBuffers[1].mData;
-
-        float freq1 = freqParam->value;
-
-        float freq2 = *frequencyCapture;
         
-        float phaseIncrement = freq2 * (3.14159 * 3.0) / 44100;
+        
+        float freq = *frequencyCapture;
+        
+        
+        
+        
+        
         
         for (int frame = 0; frame < frameCount; frame++) {
-            outL[frame] = outR[frame] = sin(  phase  );
-            phase += phaseIncrement;
-        }
+     
+            
+            float theta = freq * M_2_PI * time;
+            
+//            printf("%f \n", theta);
+            
+            float val = sin(theta);
+            
+//            printf("%f \n", val);
+            
+            
+            time += deltaTime;
+
+            outL[frame] = val;
+            outR[frame] = val;
+   
+        }x
+        
+        
+//        printf("hit");
         return noErr;
     };
 };
