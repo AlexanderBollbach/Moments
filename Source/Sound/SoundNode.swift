@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct SoundNode {
-    let identifier: String
+struct OrbSoundNode {
     
+    
+    var frequency: Double
 }

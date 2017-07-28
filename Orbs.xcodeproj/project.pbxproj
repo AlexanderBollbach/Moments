@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		291DF21F1F294B28003A9BC4 /* ABAudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291DF21E1F294B28003A9BC4 /* ABAudioEngine.swift */; };
-		291DF2211F294D08003A9BC4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291DF2201F294D08003A9BC4 /* MainViewController.swift */; };
+		291DF21F1F294B28003A9BC4 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291DF21E1F294B28003A9BC4 /* AudioEngine.swift */; };
+		291DF2211F294D08003A9BC4 /* StageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291DF2201F294D08003A9BC4 /* StageViewController.swift */; };
 		291DF2411F294D9D003A9BC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291DF2401F294D9D003A9BC4 /* AppDelegate.swift */; };
+		293323DA1F2A9D7B00EBE219 /* Orb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293323D91F2A9D7B00EBE219 /* Orb.swift */; };
+		293323DC1F2A9D9000EBE219 /* OrbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293323DB1F2A9D9000EBE219 /* OrbView.swift */; };
+		293323E11F2A9DF000EBE219 /* OrbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293323E01F2A9DF000EBE219 /* OrbManager.swift */; };
 		29B1C6301F2463DF00A3C514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29B1C62E1F2463DF00A3C514 /* Main.storyboard */; };
 		29B1C6461F24640200A3C514 /* MyAudioUnit3.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6451F24640200A3C514 /* MyAudioUnit3.m */; };
 		29B1C6491F24640200A3C514 /* AudioUnitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6481F24640200A3C514 /* AudioUnitViewController.m */; };
 		29B1C64C1F24640200A3C514 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29B1C64A1F24640200A3C514 /* MainInterface.storyboard */; };
 		29B1C6501F24640200A3C514 /* MyAudioUnit3.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 29B1C6421F24640200A3C514 /* MyAudioUnit3.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		29B1C6581F24699300A3C514 /* MyAudioUnit3.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6451F24640200A3C514 /* MyAudioUnit3.m */; };
+		29B2A24D1F2AA03800DC30EE /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B2A24C1F2AA03800DC30EE /* Stage.swift */; };
+		29B2A24F1F2AA07700DC30EE /* StageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B2A24E1F2AA07700DC30EE /* StageView.swift */; };
 		29E364101F295388004C44CB /* SoundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E3640F1F295388004C44CB /* SoundNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,10 +50,13 @@
 
 /* Begin PBXFileReference section */
 		291DF21D1F294B28003A9BC4 /* AUTest3-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AUTest3-Bridging-Header.h"; sourceTree = "<group>"; };
-		291DF21E1F294B28003A9BC4 /* ABAudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABAudioEngine.swift; sourceTree = "<group>"; };
-		291DF2201F294D08003A9BC4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		291DF21E1F294B28003A9BC4 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
+		291DF2201F294D08003A9BC4 /* StageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageViewController.swift; sourceTree = "<group>"; };
 		291DF2401F294D9D003A9BC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		29B1C6251F2463DF00A3C514 /* AUTest3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AUTest3.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		293323D91F2A9D7B00EBE219 /* Orb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orb.swift; sourceTree = "<group>"; };
+		293323DB1F2A9D9000EBE219 /* OrbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbView.swift; sourceTree = "<group>"; };
+		293323E01F2A9DF000EBE219 /* OrbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbManager.swift; sourceTree = "<group>"; };
+		29B1C6251F2463DF00A3C514 /* Orbs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orbs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B1C62F1F2463DF00A3C514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		29B1C6361F2463DF00A3C514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29B1C6421F24640200A3C514 /* MyAudioUnit3.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyAudioUnit3.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +66,8 @@
 		29B1C6481F24640200A3C514 /* AudioUnitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitViewController.m; sourceTree = "<group>"; };
 		29B1C64B1F24640200A3C514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		29B1C64D1F24640200A3C514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29B2A24C1F2AA03800DC30EE /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
+		29B2A24E1F2AA07700DC30EE /* StageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageView.swift; sourceTree = "<group>"; };
 		29E3640F1F295388004C44CB /* SoundNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +92,7 @@
 		291DF2421F294E24003A9BC4 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				291DF2401F294D9D003A9BC4 /* AppDelegate.swift */,
 				29B1C62E1F2463DF00A3C514 /* Main.storyboard */,
 				291DF21D1F294B28003A9BC4 /* AUTest3-Bridging-Header.h */,
 				29B1C6361F2463DF00A3C514 /* Info.plist */,
@@ -89,10 +100,36 @@
 			path = Misc;
 			sourceTree = "<group>";
 		};
+		293323DD1F2A9DA900EBE219 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				291DF2201F294D08003A9BC4 /* StageViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		293323DE1F2A9DC500EBE219 /* Orbs */ = {
+			isa = PBXGroup;
+			children = (
+				293323E01F2A9DF000EBE219 /* OrbManager.swift */,
+				293323D91F2A9D7B00EBE219 /* Orb.swift */,
+				293323DB1F2A9D9000EBE219 /* OrbView.swift */,
+			);
+			path = Orbs;
+			sourceTree = "<group>";
+		};
+		293323DF1F2A9DCF00EBE219 /* AudioEngine */ = {
+			isa = PBXGroup;
+			children = (
+				291DF21E1F294B28003A9BC4 /* AudioEngine.swift */,
+			);
+			path = AudioEngine;
+			sourceTree = "<group>";
+		};
 		29B1C61C1F2463DF00A3C514 = {
 			isa = PBXGroup;
 			children = (
-				29B1C6271F2463DF00A3C514 /* AUTest3 */,
+				29B1C6271F2463DF00A3C514 /* Source */,
 				29B1C6431F24640200A3C514 /* MyAudioUnit3 */,
 				29B1C6261F2463DF00A3C514 /* Products */,
 			);
@@ -101,22 +138,23 @@
 		29B1C6261F2463DF00A3C514 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				29B1C6251F2463DF00A3C514 /* AUTest3.app */,
+				29B1C6251F2463DF00A3C514 /* Orbs.app */,
 				29B1C6421F24640200A3C514 /* MyAudioUnit3.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		29B1C6271F2463DF00A3C514 /* AUTest3 */ = {
+		29B1C6271F2463DF00A3C514 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				29B2A24B1F2AA03100DC30EE /* Stage */,
+				293323DF1F2A9DCF00EBE219 /* AudioEngine */,
+				29B2A24A1F2A9FC400DC30EE /* Sound */,
+				293323DE1F2A9DC500EBE219 /* Orbs */,
+				293323DD1F2A9DA900EBE219 /* View */,
 				291DF2421F294E24003A9BC4 /* Misc */,
-				291DF21E1F294B28003A9BC4 /* ABAudioEngine.swift */,
-				29E3640F1F295388004C44CB /* SoundNode.swift */,
-				291DF2201F294D08003A9BC4 /* MainViewController.swift */,
-				291DF2401F294D9D003A9BC4 /* AppDelegate.swift */,
 			);
-			path = AUTest3;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		29B1C6431F24640200A3C514 /* MyAudioUnit3 */ = {
@@ -132,12 +170,29 @@
 			path = MyAudioUnit3;
 			sourceTree = "<group>";
 		};
+		29B2A24A1F2A9FC400DC30EE /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				29E3640F1F295388004C44CB /* SoundNode.swift */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
+		29B2A24B1F2AA03100DC30EE /* Stage */ = {
+			isa = PBXGroup;
+			children = (
+				29B2A24C1F2AA03800DC30EE /* Stage.swift */,
+				29B2A24E1F2AA07700DC30EE /* StageView.swift */,
+			);
+			path = Stage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		29B1C6241F2463DF00A3C514 /* AUTest3 */ = {
+		29B1C6241F2463DF00A3C514 /* Orbs */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 29B1C63B1F2463DF00A3C514 /* Build configuration list for PBXNativeTarget "AUTest3" */;
+			buildConfigurationList = 29B1C63B1F2463DF00A3C514 /* Build configuration list for PBXNativeTarget "Orbs" */;
 			buildPhases = (
 				29B1C6211F2463DF00A3C514 /* Sources */,
 				29B1C6221F2463DF00A3C514 /* Frameworks */,
@@ -149,9 +204,9 @@
 			dependencies = (
 				29B1C64F1F24640200A3C514 /* PBXTargetDependency */,
 			);
-			name = AUTest3;
+			name = Orbs;
 			productName = AUTest3;
-			productReference = 29B1C6251F2463DF00A3C514 /* AUTest3.app */;
+			productReference = 29B1C6251F2463DF00A3C514 /* Orbs.app */;
 			productType = "com.apple.product-type.application";
 		};
 		29B1C6411F24640200A3C514 /* MyAudioUnit3 */ = {
@@ -189,7 +244,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 29B1C6201F2463DF00A3C514 /* Build configuration list for PBXProject "AUTest3" */;
+			buildConfigurationList = 29B1C6201F2463DF00A3C514 /* Build configuration list for PBXProject "Orbs" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -202,7 +257,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				29B1C6241F2463DF00A3C514 /* AUTest3 */,
+				29B1C6241F2463DF00A3C514 /* Orbs */,
 				29B1C6411F24640200A3C514 /* MyAudioUnit3 */,
 			);
 		};
@@ -233,10 +288,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				291DF2411F294D9D003A9BC4 /* AppDelegate.swift in Sources */,
+				293323E11F2A9DF000EBE219 /* OrbManager.swift in Sources */,
 				29B1C6581F24699300A3C514 /* MyAudioUnit3.m in Sources */,
-				291DF2211F294D08003A9BC4 /* MainViewController.swift in Sources */,
+				29B2A24D1F2AA03800DC30EE /* Stage.swift in Sources */,
+				291DF2211F294D08003A9BC4 /* StageViewController.swift in Sources */,
+				29B2A24F1F2AA07700DC30EE /* StageView.swift in Sources */,
 				29E364101F295388004C44CB /* SoundNode.swift in Sources */,
-				291DF21F1F294B28003A9BC4 /* ABAudioEngine.swift in Sources */,
+				291DF21F1F294B28003A9BC4 /* AudioEngine.swift in Sources */,
+				293323DC1F2A9D9000EBE219 /* OrbView.swift in Sources */,
+				293323DA1F2A9D7B00EBE219 /* Orb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,12 +449,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 6UUR9483U2;
-				INFOPLIST_FILE = "$(SRCROOT)/AUTest3/Misc/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Misc/Info.plist";
 				LD_NO_PIE = NO;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.org.me.AUTest3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AUTest3/Misc/AUTest3-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Source/Misc/AUTest3-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -407,12 +467,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 6UUR9483U2;
-				INFOPLIST_FILE = "$(SRCROOT)/AUTest3/Misc/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Misc/Info.plist";
 				LD_NO_PIE = NO;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.org.me.AUTest3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AUTest3/Misc/AUTest3-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Source/Misc/AUTest3-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -447,7 +507,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		29B1C6201F2463DF00A3C514 /* Build configuration list for PBXProject "AUTest3" */ = {
+		29B1C6201F2463DF00A3C514 /* Build configuration list for PBXProject "Orbs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				29B1C6391F2463DF00A3C514 /* Debug */,
@@ -456,7 +516,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		29B1C63B1F2463DF00A3C514 /* Build configuration list for PBXNativeTarget "AUTest3" */ = {
+		29B1C63B1F2463DF00A3C514 /* Build configuration list for PBXNativeTarget "Orbs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				29B1C63C1F2463DF00A3C514 /* Debug */,

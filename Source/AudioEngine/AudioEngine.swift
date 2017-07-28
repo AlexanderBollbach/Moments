@@ -8,23 +8,33 @@
 
 import AVFoundation
 
-class ABAudioEngine {
+
+protocol Unit {
+    
+    var identifier: String { get }
+}
+
+struct SinUnit: Unit {
+    
+    let identifier: String
+    
+    var auAudioUnit: AUAudioUnit
+    var avAudioUnit: AVAudioUnit
+}
+
+class AudioEngine {
+    
+    static let shared = AudioEngine()
     
     let audioEngine = AVAudioEngine()
     var hardwareFormat: AVAudioFormat!
     
-    var nodes = [SoundNode]()
-    
-    var audioUnits = [String: AVAudioUnit]()
-    
-    static var nodeIdentifierCount = 0
+    var units = [String: Unit]()
     
     init() {
         
         hardwareFormat = audioEngine.outputNode.outputFormat(forBus: 0)
         audioEngine.connect(audioEngine.mainMixerNode, to: audioEngine.outputNode, format: hardwareFormat)
-//        audioEngine.manualRenderingMaximumFrameCount = 256
-        
         
         
         do {
@@ -48,37 +58,28 @@ class ABAudioEngine {
     }
     
     func run() {
-        
         do {
             try audioEngine.start()
         } catch (let error) {
             fatalError("\(error)")
         }
-        
-        
-        
-        
     }
     
-    func addSinGenerator(completed: @escaping (SoundNode) -> Void) {
+    func addSinGenerator(identifier: String, completed: @escaping () -> Void) {
         
         let stereoFormat = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 2)
         
         buildSinGenerator { unit in
             
-            let nodeID = String(ABAudioEngine.nodeIdentifierCount)
-            ABAudioEngine.nodeIdentifierCount += 1
-            
+           
             self.audioEngine.attach(unit)
             self.audioEngine.connect(unit, to: self.audioEngine.mainMixerNode, format: stereoFormat)
 
+            let newUnit = SinUnit(identifier: identifier, auAudioUnit: unit.auAudioUnit, avAudioUnit: unit)
             
-            // add node
-            let node = SoundNode(identifier: nodeID)
-            self.nodes.append(node)
-            self.audioUnits[nodeID] = unit
+            self.units[identifier] = newUnit
             
-            completed(node)
+            completed()
         }
     }
     
@@ -94,14 +95,16 @@ class ABAudioEngine {
     }
     
     
-    func setFrequency(node: SoundNode, value: Double) {
+    func setFrequency(identifier: String, value: Double) {
         
-        let audioUnit = self.audioUnits[node.identifier]
+        guard let sinUnit = self.units[identifier] as? SinUnit else { return }
         
-        let paramTree = audioUnit?.auAudioUnit.parameterTree
+        let auUnit = sinUnit.auAudioUnit
         
+        let paramTree = auUnit.parameterTree
+
         let freqParam = paramTree?.value(forKey: "frequency") as? AUParameter
-        
+
         if let freq = freqParam {
             freq.value = AUValue(value)
         }

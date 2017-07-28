@@ -23,11 +23,14 @@
 }
 @synthesize parameterTree = _parameterTree;
 
-
-
-
-
 const AudioUnitParameterID frequencyAddress = 0;
+
+
+
+
+
+
+
 
 - (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription options:(AudioComponentInstantiationOptions)options error:(NSError **)outError {
     self = [super initWithComponentDescription:componentDescription options:options error:outError];
@@ -96,6 +99,11 @@ const AudioUnitParameterID frequencyAddress = 0;
     return self;
 }
 
+
+
+
+
+
 - (AUAudioUnitBusArray *)outputBusses { return _outputBusArray; }
 
 
@@ -110,6 +118,16 @@ const AudioUnitParameterID frequencyAddress = 0;
 
 - (void)deallocateRenderResources { [super deallocateRenderResources]; }
 
+
+
+
+
+
+
+
+
+
+// RENDERING
 void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount frameCount, bool zeroFill, AudioBufferList const * originalAudioBufferList) {
     
     UInt32 byteSize = frameCount * sizeof(float);
@@ -130,24 +148,29 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
     }
 }
 
-#pragma mark - AUAudioUnit (AUAudioUnitImplementation)
+
+
+
+
+
+// Get Render Block
 - (AUInternalRenderBlock)internalRenderBlock {
     
    
+    // memory
     AUValue * frequencyCapture = &frequency;
-    
     AudioBufferList const ** originalABLCapture = &originalAudioBufferList;
     
+    // DSP
     __block float phase = 0.0;
-    
-    float deltaTime = 1.0 / 44100;
-    
     float SR = 44100;
     
+    
+    // RENDER Block
     return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AVAudioFrameCount frameCount, NSInteger outputBusNumber, AudioBufferList *outputData, const AURenderEvent *realtimeEventListHead, AURenderPullInputBlock pullInputBlock) {
         
         
-        
+        // memory configuring
         AudioBufferList const * oABL = *originalABLCapture;
         prepareOutputBufferList(outputData, frameCount, true, oABL);
         
@@ -157,16 +180,13 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
         
         
         float freq = *frequencyCapture;
-  
-        
-        double phaseIncrement = 2 * M_PI * freq / SR;
 
+        double phaseIncrement = 2 * M_PI * freq / SR;
         
-        
+
+        // Gen Sin wave
         for (int frame = 0; frame < frameCount; frame++) {
-     
-            
-   
+
             float val = sin(phase);
 
             phase = phase + phaseIncrement;
@@ -175,19 +195,12 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
                 phase = phase - (2 * M_PI);
             }
 
-
-   
-            
-
             outL[frame] = val;
             outR[frame] = val;
-   
         }
-        
 
         
-        
-//        printf("hit");
+        // All good
         return noErr;
     };
 };
