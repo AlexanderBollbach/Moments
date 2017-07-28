@@ -34,17 +34,17 @@ class Stage {
     
     
     func updateViewState() {
-        
         stageView.update(with: orbManager.allOrbs())
-        
         stageView.layoutIfNeeded()
     }
     
-    
     func genID() -> String {
-        
         IDMAker += 1
         return String(IDMAker)
+    }
+    
+    func updateOrb(metrics: OrbMovementMetrics) {
+        orbManager.updateOrb(metrics: metrics)
     }
 }
 
@@ -55,7 +55,9 @@ extension Stage: StageViewDelegate {
         switch event {
         case .tapped:
             addOrb()
-            break
+        case .OrbMoved(let metrics):
+            updateOrb(metrics: metrics)
+            
             
         }
     }

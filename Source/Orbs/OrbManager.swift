@@ -16,24 +16,44 @@ class OrbManager {
     
     var IDMAker = 0
     
-    var orbs = [String: Orb]()
+    var orbs = [Orb]()
     
     
     func addSinOrb(id: String) {
         
-        let orb = Orb(id: id)
+        let orb = SinOrb(id: id)
         
-        self.orbs[id] = orb
+        self.orbs.append(orb)
         
         engine.addSinGenerator(identifier: id) { }
     }
     
     func allOrbs() -> [Orb] {
-        
-        let orbList = orbs.map { $0.1 }
-        return orbList
+        return self.orbs
     }
     
+    func getOrb(id: String) -> Orb? {
+        return (self.orbs.filter { $0.id == id }).first
+    }
+    
+    func updateOrb(metrics: OrbMovementMetrics) {
+        
+        guard let orb = getOrb(id: metrics.id) else { return }
+        updateOrbSettings(orb: orb, metrics: metrics)
+        engine.updateUnit(orb: orb)
+    }
+    
+    
+    func updateOrbSettings(orb: Orb, metrics: OrbMovementMetrics) {
+        
+        switch orb {
+        case let orb as SinOrb:
+            orb.frequency = metrics.orbPosition.x * 1000
+        default:
+            break
+        }
+        
+    }
 
     
 }

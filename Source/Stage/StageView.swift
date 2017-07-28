@@ -12,8 +12,15 @@ protocol StageViewDelegate: class {
     func interacted(event: StageEvent)
 }
 
+struct OrbMovementMetrics {
+    
+    var id: String
+    let orbPosition: OrbPosition
+}
+
 enum StageEvent {
     case tapped
+    case OrbMoved(OrbMovementMetrics)
 }
 
 class StageView: UIView {
@@ -22,12 +29,20 @@ class StageView: UIView {
     
     weak var delegate: StageViewDelegate?
     
-    var orbs = [String: OrbView]()
+    var orbs = [OrbView]()
     
     init() {
         super.init(frame: .zero)
         
         backgroundColor = UIColor.blue.withAlphaComponent(0.4)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        self.addGestureRecognizer(tap)
+        
+    }
+    
+    func tapped(rec: UITapGestureRecognizer) {
+        delegate?.interacted(event: .tapped)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,17 +50,17 @@ class StageView: UIView {
     }
     
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        delegate?.interacted(event: .tapped)
-    }
     
     func addOrb(id: String) {
         
-        let orbView = OrbView()
+        let orbView = OrbView(id: id)
         
-        self.orbs[id] = orbView
+        self.orbs.append(orbView)
         
         self.addSubview(orbView)
+        
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(panned))
+        orbView.addGestureRecognizer(pan)
     }
     
     func update(with orbs: [Orb]) {
@@ -55,6 +70,21 @@ class StageView: UIView {
         }
     }
     
-    func getOrbView(id: String) -> OrbView? { return self.orbs[id] }
+    func getOrbView(id: String) -> OrbView? { return (self.orbs.filter { $0.id == id }).first }
+    
+    func panned(recognizer: UIPanGestureRecognizer) {
+        
+        if let orb = recognizer.view as? OrbView {
+            
+            let point = recognizer.location(in: self)
+            recognizer.view?.center = point
+            
+            let orbPosition = point.orbPosition(inSize: self.bounds.size)
+            
+            let event = StageEvent.OrbMoved(OrbMovementMetrics(id: orb.id, orbPosition: orbPosition))
+            
+            delegate?.interacted(event: event)
+        }
+    }
 }
 

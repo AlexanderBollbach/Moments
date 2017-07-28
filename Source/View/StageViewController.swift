@@ -26,6 +26,13 @@ class StageViewController: UIViewController {
         stageView.delegate = Stage.shared
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Stage.shared.audioEngine.run()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

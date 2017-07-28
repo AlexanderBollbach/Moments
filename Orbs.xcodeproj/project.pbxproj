@@ -21,7 +21,6 @@
 		29B1C6581F24699300A3C514 /* MyAudioUnit3.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6451F24640200A3C514 /* MyAudioUnit3.m */; };
 		29B2A24D1F2AA03800DC30EE /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B2A24C1F2AA03800DC30EE /* Stage.swift */; };
 		29B2A24F1F2AA07700DC30EE /* StageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B2A24E1F2AA07700DC30EE /* StageView.swift */; };
-		29E364101F295388004C44CB /* SoundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E3640F1F295388004C44CB /* SoundNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +67,6 @@
 		29B1C64D1F24640200A3C514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29B2A24C1F2AA03800DC30EE /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
 		29B2A24E1F2AA07700DC30EE /* StageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageView.swift; sourceTree = "<group>"; };
-		29E3640F1F295388004C44CB /* SoundNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,7 +147,6 @@
 			children = (
 				29B2A24B1F2AA03100DC30EE /* Stage */,
 				293323DF1F2A9DCF00EBE219 /* AudioEngine */,
-				29B2A24A1F2A9FC400DC30EE /* Sound */,
 				293323DE1F2A9DC500EBE219 /* Orbs */,
 				293323DD1F2A9DA900EBE219 /* View */,
 				291DF2421F294E24003A9BC4 /* Misc */,
@@ -168,14 +165,6 @@
 				29B1C64D1F24640200A3C514 /* Info.plist */,
 			);
 			path = MyAudioUnit3;
-			sourceTree = "<group>";
-		};
-		29B2A24A1F2A9FC400DC30EE /* Sound */ = {
-			isa = PBXGroup;
-			children = (
-				29E3640F1F295388004C44CB /* SoundNode.swift */,
-			);
-			path = Sound;
 			sourceTree = "<group>";
 		};
 		29B2A24B1F2AA03100DC30EE /* Stage */ = {
@@ -293,7 +282,6 @@
 				29B2A24D1F2AA03800DC30EE /* Stage.swift in Sources */,
 				291DF2211F294D08003A9BC4 /* StageViewController.swift in Sources */,
 				29B2A24F1F2AA07700DC30EE /* StageView.swift in Sources */,
-				29E364101F295388004C44CB /* SoundNode.swift in Sources */,
 				291DF21F1F294B28003A9BC4 /* AudioEngine.swift in Sources */,
 				293323DC1F2A9D9000EBE219 /* OrbView.swift in Sources */,
 				293323DA1F2A9D7B00EBE219 /* Orb.swift in Sources */,

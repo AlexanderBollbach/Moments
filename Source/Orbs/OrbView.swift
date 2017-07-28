@@ -9,37 +9,18 @@
 import UIKit
 
 
-enum OrbSize {
-    case small
-    case medium
-    case large
-    
-    var sizeInPoints: CGFloat {
-        switch self {
-        case .small:
-            return 0.1
-        case .medium:
-            return 0.2
-        case .large:
-            return 0.35
-        }
-    }
-}
-
-protocol OrbViewConfig {
-    
-    var size: OrbSize { get }
-    var position: OrbPosition { get }
-}
 
 class OrbView: UIView {
     
-    init() {
+    let id: String
+    
+    init(id: String) {
+        
+        self.id = id
+        
         super.init(frame: .zero)
         
         self.backgroundColor = .red
-        
-        
     }
     
     func configure(with config: OrbViewConfig?) {
@@ -67,6 +48,12 @@ extension CGPoint {
         
         self.x = CGFloat(position.x) * inSize.width
         self.y = CGFloat(position.y) * inSize.height
+    }
+    
+    func orbPosition(inSize: CGSize) -> OrbPosition {
+        let orbX = Double(self.x / inSize.width)
+        let orbY = Double(self.x / inSize.height)
+        return OrbPosition(x: orbX, y: orbY)
     }
 }
 

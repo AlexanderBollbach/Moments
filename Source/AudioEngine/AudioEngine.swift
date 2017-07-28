@@ -95,20 +95,44 @@ class AudioEngine {
     }
     
     
-    func setFrequency(identifier: String, value: Double) {
+ 
+    
+    
+    func updateUnit(orb: OrbAudio) {
+        
+        
+        switch orb {
+        case let orb as SinAudio:
+            updateSinUnit(orb: orb)
+        default: break
+        }
+        
+    }
+    
+    
+    private func updateSinUnit(orb: SinAudio) {
+        
+        setFrequency(identifier: orb.id, value: orb.frequency)
+    }
+    
+    
+    
+    
+    
+    
+    private func setFrequency(identifier: String, value: Double) {
         
         guard let sinUnit = self.units[identifier] as? SinUnit else { return }
         
         let auUnit = sinUnit.auAudioUnit
         
         let paramTree = auUnit.parameterTree
-
+        
         let freqParam = paramTree?.value(forKey: "frequency") as? AUParameter
-
+        
         if let freq = freqParam {
             freq.value = AUValue(value)
         }
-        
     }
     
     

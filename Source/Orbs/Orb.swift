@@ -6,28 +6,81 @@
 //  Copyright © 2017 Alexander Bollbach. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-struct Orb: OrbViewConfig {
+enum AudioType {
+    case generic
+    case sin
+}
+
+class Orb: OrbViewConfig, OrbAudio {
     
     let id: String
-
-    var frequency = 0.0
+    var audioType: AudioType = .generic
     
-    var view: OrbView?
+    // audio
+    var volume = 0.0
+    
+    // view
+    var size: OrbSize = .small
+    var position = OrbPosition(x: 0.5, y: 0.5)
     
     init(id: String) {
         self.id = id
     }
+}
+
+
+class SinOrb: Orb, SinAudio {
     
-    var size: OrbSize = .small
+    var frequency = 0.0
     
-    var position = OrbPosition(x: 0.5, y: 0.5)
+    override init(id: String) {
+        super.init(id: id)
+        
+        audioType = .sin
+    }
+    
 }
 
 
 struct OrbPosition {
     let x: Double
     let y: Double
+}
+
+
+
+enum OrbSize {
+    case small
+    case medium
+    case large
+    
+    var sizeInPoints: CGFloat {
+        switch self {
+        case .small:
+            return 0.1
+        case .medium:
+            return 0.2
+        case .large:
+            return 0.35
+        }
+    }
+}
+
+protocol OrbViewConfig {
+    
+    var size: OrbSize { get }
+    var position: OrbPosition { get }
+}
+
+protocol OrbAudio {
+    var id: String { get }
+    var volume: Double { get }
+}
+
+protocol SinAudio: OrbAudio {
+
+    var frequency: Double { get }
 }
 
