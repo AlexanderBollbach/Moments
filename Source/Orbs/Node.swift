@@ -9,42 +9,56 @@
 import UIKit
 
 
-protocol Freezable {
-    
+protocol Node: NodeViewConfig {
     var id: String { get }
     
-//    func freeze() ->
+    var size: NodeSize { get set }
+    var position: NodePosition { get set }
 }
 
-class Node: NodeViewConfig, NodeAudio {
+struct BaseNode: Node, AudioMetrics, NodeViewConfig {
+    
+    let id: String
+
+    // view
+    var size: NodeSize = .small
+    var position = NodePosition(x: 0.5, y: 0.5)
+}
+
+
+
+
+struct ToneNode: Node, ToneNodeAudioMetrics {
     
     let id: String
     
     // audio
     var volume = 0.0
+    var frequency = 0.0
     
     // view
     var size: NodeSize = .small
     var position = NodePosition(x: 0.5, y: 0.5)
     
-    init(id: String) {
+    init(id: String, volume: Double = 0, frequency: Double = 0) {
         self.id = id
-    }
-}
-
-
-class SinNode: Node, SinAudio {
-    
-    var frequency = 0.0
-    
-    override init(id: String) {
-        super.init(id: id)
-
+        self.volume = volume
+        self.frequency = frequency
     }
 }
 
 
 
+
+
+
+
+
+
+
+
+
+// VIEW
 struct NodePosition: Equatable {
     let x: Double
     let y: Double
@@ -79,13 +93,22 @@ protocol NodeViewConfig {
     var position: NodePosition { get }
 }
 
-protocol NodeAudio {
+
+
+
+
+protocol AudioMetrics {
     var id: String { get }
+}
+
+protocol ToneNodeAudioMetrics: AudioMetrics {
+    var frequency: Double { get }
     var volume: Double { get }
 }
 
-protocol SinAudio: NodeAudio {
-
-    var frequency: Double { get }
+enum NodeAudio {
+    case toneNode(ToneNodeAudioMetrics)
 }
+
+
 

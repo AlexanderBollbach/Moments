@@ -63,23 +63,22 @@ class AudioEngine {
         }
     }
     
-    func addSinGenerator(identifier: String, completed: @escaping () -> Void) {
+    func addToneGenerator(id: String) {
         
         let stereoFormat = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 2)
         
-        buildSinGenerator { unit in
+        buildToneGenerator { unit in
             self.audioEngine.attach(unit)
             self.audioEngine.connect(unit, to: self.audioEngine.mainMixerNode, format: stereoFormat)
 
-            let newUnit = SinUnit(identifier: identifier, auAudioUnit: unit.auAudioUnit, avAudioUnit: unit)
+            let newUnit = SinUnit(identifier: id, auAudioUnit: unit.auAudioUnit, avAudioUnit: unit)
             
-            self.units[identifier] = newUnit
-            
-            completed()
+            self.units[id] = newUnit
+
         }
     }
     
-    func buildSinGenerator(completed: @escaping (AVAudioUnit) -> Swift.Void) {
+    func buildToneGenerator(completed: @escaping (AVAudioUnit) -> Swift.Void) {
         
         let desc = AudioComponentDescription(componentType: kAudioUnitType_Generator, componentSubType: 0x6d617533, componentManufacturer: 0x4d415533, componentFlags: 0, componentFlagsMask: 0)
         
@@ -92,16 +91,17 @@ class AudioEngine {
 
     
     
-    func updateUnit(node: NodeAudio) {
+    func updateUnit(node: AudioMetrics) {
         switch node {
-        case let node as SinAudio:
+
+        case let node as ToneNodeAudioMetrics:
             updateSinUnit(node: node)
         default: break
         }
     }
     
     
-    private func updateSinUnit(node: SinAudio) {
+    private func updateSinUnit(node: ToneNodeAudioMetrics) {
         setFrequency(identifier: node.id, value: node.frequency)
         setVolume(identifier: node.id, value: node.volume)
     }

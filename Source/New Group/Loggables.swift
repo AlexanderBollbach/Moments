@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension SinNode: CustomStringConvertible {
+extension ToneNode: CustomStringConvertible {
     
     var description: String {
         return "frequency: \(self.frequency) \nvolume: \(self.volume)"

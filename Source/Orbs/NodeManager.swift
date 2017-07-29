@@ -12,21 +12,17 @@ class NodeManager {
     
     static let shared = NodeManager()
     
-    let engine = AudioEngine.shared
-    
-    var IDMAker = 0
     
     var nodes = [Node]()
     
     
-    func addSinNode(id: String, at position: NodePosition = NodePosition.defaultPosition) {
+    func addToneNode(id: String, at position: NodePosition = NodePosition.defaultPosition) {
         
-        let node = SinNode(id: id)
+        var node = ToneNode(id: id)
         node.position = position
         
         self.nodes.append(node)
         
-        engine.addSinGenerator(identifier: id) { }
     }
     
     func allNodes() -> [Node] {
@@ -41,25 +37,82 @@ class NodeManager {
         
         guard let node = getNode(id: metrics.id) else { return }
         
-        node.position = metrics.nodePosition
+        // base node stuff
+        updatePosition(id: node.id, value: metrics.nodePosition)
         
-        updateNodeSettings(node: node, metrics: metrics)
-        engine.updateUnit(node: node)
-    }
-    
-    
-    func updateNodeSettings(node: Node, metrics: NodeMovementMetrics) {
-        
+        // refined
         switch node {
-        case let node as SinNode:
-            node.frequency = metrics.nodePosition.x * 1000
-            node.volume = metrics.nodePosition.y
+        case let node as ToneNode:
+            updateFrequency(id: node.id, value: metrics.nodePosition.x * 1000)
+            updateVolume(id: node.id, value: metrics.nodePosition.y)
         default:
             break
         }
         
         print(node)
     }
-
+    
+    func audioForNode(id: String) -> AudioMetrics? {
+        
+        guard let node = (nodes.filter { $0.id == id }).first else { return nil }
+        
+        switch node {
+        case let node as ToneNode:
+            return node
+        default:
+            break
+        }
+        
+        return nil
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // MUTATION
+    
+    func updateFrequency(id: String, value: Double) {
+        
+        guard let index = nodes.index(where: { $0.id == id }),
+            var node = nodes[index] as? ToneNode else { return }
+        
+        node.frequency = value
+        nodes[index] = node
+    }
+    
+    
+    func updateVolume(id: String, value: Double) {
+        
+        guard let index = nodes.index(where: { $0.id == id }),
+            var node = nodes[index] as? ToneNode else { return }
+        
+        node.volume = value
+        nodes[index] = node
+    }
+    
+    
+    func updatePosition(id: String, value: NodePosition) {
+        
+        guard let index = nodes.index(where: { $0.id == id }) else { return }
+        
+        nodes[index].position = value
+        
+    }
+    
+    
+    
     
 }

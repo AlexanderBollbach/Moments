@@ -24,8 +24,11 @@ class Stage {
     fileprivate func addNode(at position : NodePosition) {
         
         let id = genID()
-        nodeManager.addSinNode(id: id, at: position)
+        nodeManager.addToneNode(id: id, at: position)
+        
         stageView.addNode(id: id)
+        
+        audioEngine.addToneGenerator(id: id)
         
         updateViewState()
     }
@@ -43,6 +46,12 @@ class Stage {
     
     func updateNode(metrics: NodeMovementMetrics) {
         nodeManager.updateNode(metrics: metrics)
+        
+        if let audio = nodeManager.audioForNode(id: metrics.id) {
+        
+            audioEngine.updateUnit(node: audio)
+        }
+        
     }
 }
 
