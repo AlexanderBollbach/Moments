@@ -11,45 +11,43 @@ import Foundation
 class Stage {
     
     var IDMAker = 0
-    
     static let shared = Stage()
     
     let audioEngine = AudioEngine.shared
-    
     let nodeManager = NodeManager.shared
-    
     let stageView = StageView.shared
-    
+    let momentsCoordinator = MomentsCoordinator()
     
     fileprivate func addNode(at position : NodePosition) {
-        
         let id = genID()
         nodeManager.addToneNode(id: id, at: position)
-        
         stageView.addNode(id: id)
-        
         audioEngine.addToneGenerator(id: id)
-        
         updateViewState()
     }
-    
     
     func updateViewState() {
         stageView.update(with: nodeManager.allNodes())
         stageView.layoutIfNeeded()
     }
     
-    func genID() -> String {
-        IDMAker += 1
-        return String(IDMAker)
-    }
+    func genID() -> String { IDMAker += 1 ; return String(IDMAker) }
     
     func updateNode(metrics: NodeMovementMetrics) {
         nodeManager.updateNode(metrics: metrics)
+        if let audio = nodeManager.audioForNode(id: metrics.id) { audioEngine.updateUnit(node: audio) }
+    }
+    
+    
+    func apply(moment: Moment) {
         
-        if let audio = nodeManager.audioForNode(id: metrics.id) {
+        let newNodes = moment.nodes
         
-            audioEngine.updateUnit(node: audio)
+        nodeManager.update(newNodes: newNodes)
+        stageView.update(with: newNodes)
+        
+        newNodes.forEach {
+            if let audio = nodeManager.audioForNode(id: $0.id) { audioEngine.updateUnit(node: audio) }
         }
         
     }
@@ -58,15 +56,22 @@ class Stage {
 extension Stage: StageViewDelegate {
     
     func interacted(event: StageEvent) {
-        
         switch event {
         case .tapped(let position):
             addNode(at: position)
         case .NodeMoved(let metrics):
             updateNode(metrics: metrics)
-            
-            
         }
     }
     
+    func menuButtonTapped(button: MenuButton) {
+        switch button {
+        case .addMoment:
+            momentsCoordinator.addMoment(nodes: nodeManager.allNodes())
+        case .logMoments:
+            momentsCoordinator.logMoments()
+        case .nextMoment:
+            apply(moment: momentsCoordinator.nextMoment())
+        }
+    }
 }

@@ -10,10 +10,16 @@ import UIKit
 
 protocol StageViewDelegate: class {
     func interacted(event: StageEvent)
+    func menuButtonTapped(button: MenuButton)
+}
+
+enum MenuButton {
+    case addMoment
+    case logMoments
+    case nextMoment
 }
 
 struct NodeMovementMetrics {
-    
     var id: String
     let nodePosition: NodePosition
 }
@@ -31,15 +37,51 @@ class StageView: UIView {
     
     var nodes = [NodeView]()
     
-    init() {
-        super.init(frame: .zero)
+    init() { super.init(frame: .zero)
         
         backgroundColor = UIColor.blue.withAlphaComponent(0.4)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
         self.addGestureRecognizer(tap)
+ 
+        
+        
+        let titles = ["add moment", "log moments", "next moment"]
+        let buttons = [UIButton(), UIButton(), UIButton()]
+        
+        for (n,c) in buttons.enumerated() {
+            c.tag = n
+            c.setTitleColor(.black, for: .normal)
+            c.setTitle(titles[n], for: .normal)
+            c.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+            c.backgroundColor = UIColor(colorLiteralRed: Float(Double(n) * 0.3), green: 1, blue: Float(Double(n) * 0.3), alpha: 1)
+        }
+        
+        let sv = UIStackView(arrangedSubviews: buttons)
+        sv.spacing = 5
+        sv.axis = .horizontal
+        sv.distribution = .fillEqually
+        addSubview(sv)
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        sv.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
+    
+    
+    func buttonTapped(sender: UIButton) {
+        
+        switch sender.tag {
+        case 0:
+            delegate?.menuButtonTapped(button: .addMoment)
+        case 1:
+            delegate?.menuButtonTapped(button: .logMoments)
+        case 2:
+            delegate?.menuButtonTapped(button: .nextMoment)
+        default: break
+        }
         
     }
+    
     
     func tapped(rec: UITapGestureRecognizer) {
         
@@ -48,9 +90,7 @@ class StageView: UIView {
         delegate?.interacted(event: tap)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     
     

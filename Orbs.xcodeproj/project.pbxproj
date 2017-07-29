@@ -11,15 +11,13 @@
 		291DF2211F294D08003A9BC4 /* StageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291DF2201F294D08003A9BC4 /* StageViewController.swift */; };
 		291DF2411F294D9D003A9BC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291DF2401F294D9D003A9BC4 /* AppDelegate.swift */; };
 		29305C351F2C17E100F7EE2D /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29305C341F2C17E100F7EE2D /* NodeTests.swift */; };
-		29305C3E1F2C2BCC00F7EE2D /* Loggables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29305C3D1F2C2BCC00F7EE2D /* Loggables.swift */; };
+		29305C3E1F2C2BCC00F7EE2D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29305C3D1F2C2BCC00F7EE2D /* Logger.swift */; };
 		29305C411F2C379700F7EE2D /* MomentsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29305C401F2C379700F7EE2D /* MomentsCoordinator.swift */; };
 		293323DA1F2A9D7B00EBE219 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293323D91F2A9D7B00EBE219 /* Node.swift */; };
 		293323DC1F2A9D9000EBE219 /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293323DB1F2A9D9000EBE219 /* NodeView.swift */; };
 		293323E11F2A9DF000EBE219 /* NodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293323E01F2A9DF000EBE219 /* NodeManager.swift */; };
 		29B1C6301F2463DF00A3C514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29B1C62E1F2463DF00A3C514 /* Main.storyboard */; };
 		29B1C6461F24640200A3C514 /* MyAudioUnit3.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6451F24640200A3C514 /* MyAudioUnit3.m */; };
-		29B1C6491F24640200A3C514 /* AudioUnitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6481F24640200A3C514 /* AudioUnitViewController.m */; };
-		29B1C64C1F24640200A3C514 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29B1C64A1F24640200A3C514 /* MainInterface.storyboard */; };
 		29B1C6501F24640200A3C514 /* MyAudioUnit3.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 29B1C6421F24640200A3C514 /* MyAudioUnit3.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		29B1C6581F24699300A3C514 /* MyAudioUnit3.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6451F24640200A3C514 /* MyAudioUnit3.m */; };
 		29B2A24D1F2AA03800DC30EE /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B2A24C1F2AA03800DC30EE /* Stage.swift */; };
@@ -65,7 +63,7 @@
 		29305C321F2C17E100F7EE2D /* NodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		29305C341F2C17E100F7EE2D /* NodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
 		29305C361F2C17E100F7EE2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		29305C3D1F2C2BCC00F7EE2D /* Loggables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggables.swift; sourceTree = "<group>"; };
+		29305C3D1F2C2BCC00F7EE2D /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		29305C401F2C379700F7EE2D /* MomentsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsCoordinator.swift; sourceTree = "<group>"; };
 		293323D91F2A9D7B00EBE219 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		293323DB1F2A9D9000EBE219 /* NodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
@@ -76,9 +74,6 @@
 		29B1C6421F24640200A3C514 /* MyAudioUnit3.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyAudioUnit3.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B1C6441F24640200A3C514 /* MyAudioUnit3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAudioUnit3.h; sourceTree = "<group>"; };
 		29B1C6451F24640200A3C514 /* MyAudioUnit3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAudioUnit3.m; sourceTree = "<group>"; };
-		29B1C6471F24640200A3C514 /* AudioUnitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitViewController.h; sourceTree = "<group>"; };
-		29B1C6481F24640200A3C514 /* AudioUnitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitViewController.m; sourceTree = "<group>"; };
-		29B1C64B1F24640200A3C514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		29B1C64D1F24640200A3C514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29B2A24C1F2AA03800DC30EE /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
 		29B2A24E1F2AA07700DC30EE /* StageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageView.swift; sourceTree = "<group>"; };
@@ -132,7 +127,7 @@
 		29305C3C1F2C2BBB00F7EE2D /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				29305C3D1F2C2BCC00F7EE2D /* Loggables.swift */,
+				29305C3D1F2C2BCC00F7EE2D /* Logger.swift */,
 			);
 			name = Misc;
 			path = "New Group";
@@ -195,9 +190,9 @@
 		29B1C6271F2463DF00A3C514 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				29B2A24B1F2AA03100DC30EE /* Stage */,
 				29305C3F1F2C378700F7EE2D /* Moments */,
 				29305C3C1F2C2BBB00F7EE2D /* Misc */,
-				29B2A24B1F2AA03100DC30EE /* Stage */,
 				293323DF1F2A9DCF00EBE219 /* AudioEngine */,
 				293323DE1F2A9DC500EBE219 /* Orbs */,
 				293323DD1F2A9DA900EBE219 /* View */,
@@ -211,9 +206,6 @@
 			children = (
 				29B1C6441F24640200A3C514 /* MyAudioUnit3.h */,
 				29B1C6451F24640200A3C514 /* MyAudioUnit3.m */,
-				29B1C6471F24640200A3C514 /* AudioUnitViewController.h */,
-				29B1C6481F24640200A3C514 /* AudioUnitViewController.m */,
-				29B1C64A1F24640200A3C514 /* MainInterface.storyboard */,
 				29B1C64D1F24640200A3C514 /* Info.plist */,
 			);
 			path = MyAudioUnit3;
@@ -348,7 +340,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29B1C64C1F24640200A3C514 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +360,7 @@
 			files = (
 				291DF2411F294D9D003A9BC4 /* AppDelegate.swift in Sources */,
 				293323E11F2A9DF000EBE219 /* NodeManager.swift in Sources */,
-				29305C3E1F2C2BCC00F7EE2D /* Loggables.swift in Sources */,
+				29305C3E1F2C2BCC00F7EE2D /* Logger.swift in Sources */,
 				29B1C6581F24699300A3C514 /* MyAudioUnit3.m in Sources */,
 				29B2A24D1F2AA03800DC30EE /* Stage.swift in Sources */,
 				291DF2211F294D08003A9BC4 /* StageViewController.swift in Sources */,
@@ -386,7 +377,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				29B1C6461F24640200A3C514 /* MyAudioUnit3.m in Sources */,
-				29B1C6491F24640200A3C514 /* AudioUnitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,14 +402,6 @@
 				29B1C62F1F2463DF00A3C514 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		29B1C64A1F24640200A3C514 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				29B1C64B1F24640200A3C514 /* Base */,
-			);
-			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
