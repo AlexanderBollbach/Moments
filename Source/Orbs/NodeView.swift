@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class OrbView: UIView {
+class NodeView: UIView {
     
     let id: String
     
@@ -25,7 +25,7 @@ class OrbView: UIView {
         self.backgroundColor = .red
     }
     
-    func configure(with config: OrbViewConfig) {
+    func configure(with config: NodeViewConfig) {
         
         guard let sv = superview else { return }
  
@@ -43,16 +43,16 @@ class OrbView: UIView {
 
 extension CGPoint {
     
-    init(with position: OrbPosition, inSize: CGSize) {
+    init(with position: NodePosition, inSize: CGSize) {
         
         self.x = CGFloat(position.x) * inSize.width
         self.y = CGFloat(position.y) * inSize.height
     }
     
-    func orbPosition(inSize: CGSize) -> OrbPosition {
-        let orbX = Double(self.x / inSize.width)
-        let orbY = Double(self.y / inSize.height)
-        return OrbPosition(x: orbX, y: orbY)
+    func nodePosition(inSize: CGSize) -> NodePosition {
+        let nodeX = Double(self.x / inSize.width)
+        let nodeY = Double(self.y / inSize.height)
+        return NodePosition(x: nodeX, y: nodeY)
     }
 }
 

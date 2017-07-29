@@ -15,15 +15,20 @@
 @end
 
 @implementation MyAudioUnit3 {
+    
     float frequency;
+    float volume;
+    
     AudioBufferList const * originalAudioBufferList;
     AVAudioPCMBuffer* pcmBuffer;
     AUAudioUnitBus *_outputBus;
     AudioBufferList renderABL;
 }
+
 @synthesize parameterTree = _parameterTree;
 
 const AudioUnitParameterID frequencyAddress = 0;
+const AudioUnitParameterID volumeAddress = 1;
 
 
 
@@ -50,11 +55,23 @@ const AudioUnitParameterID frequencyAddress = 0;
                                                                    flags:flags
                                                             valueStrings:nil
                                                      dependentParameters:nil];
-    param1.value = 500;
+    
+    AUParameter *param2 = [AUParameterTree createParameterWithIdentifier:@"volume"
+                                                                    name:@"Volume"
+                                                                 address:volumeAddress
+                                                                     min:0
+                                                                     max:1
+                                                                    unit:kAudioUnitParameterUnit_CustomUnit
+                                                                unitName:nil
+                                                                   flags:flags
+                                                            valueStrings:nil
+                                                     dependentParameters:nil];
+    
+    param1.value = 0;
     
     
     
-    _parameterTree = [AUParameterTree createTreeWithChildren:@[ param1 ]];
+    _parameterTree = [AUParameterTree createTreeWithChildren:@[ param1, param2 ]];
     
     
     
@@ -68,6 +85,8 @@ const AudioUnitParameterID frequencyAddress = 0;
         switch (param.address) {
             case frequencyAddress:
                 return (AUValue)strong->frequency;
+            case volumeAddress:
+                return (AUValue)strong->volume;
             default:
                 return (AUValue) 0.0;
         }
@@ -83,6 +102,9 @@ const AudioUnitParameterID frequencyAddress = 0;
                 
                 strong->frequency = value;
                 break;
+            case volumeAddress:
+                strong->volume = value;
+                break;
             default:
                 break;
         }
@@ -93,9 +115,7 @@ const AudioUnitParameterID frequencyAddress = 0;
     
     _outputBus = [[AUAudioUnitBus alloc] initWithFormat:defaultFormat error:nil];
     _outputBusArray = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self busType:AUAudioUnitBusTypeOutput busses: @[_outputBus]];
-    
-//    self.maximumFramesToRender = 512;
-    
+
     return self;
 }
 
@@ -117,11 +137,6 @@ const AudioUnitParameterID frequencyAddress = 0;
 }
 
 - (void)deallocateRenderResources { [super deallocateRenderResources]; }
-
-
-
-
-
 
 
 
@@ -159,6 +174,7 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
    
     // memory
     AUValue * frequencyCapture = &frequency;
+    AUValue * volumeCapture = &volume;
     AudioBufferList const ** originalABLCapture = &originalAudioBufferList;
     
     // DSP
@@ -180,6 +196,7 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
         
         
         float freq = *frequencyCapture;
+        float vol = *volumeCapture;
 
         double phaseIncrement = 2 * M_PI * freq / SR;
         
@@ -187,7 +204,7 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
         // Gen Sin wave
         for (int frame = 0; frame < frameCount; frame++) {
 
-            float val = sin(phase);
+            float val = sin(phase) * vol;
 
             phase = phase + phaseIncrement;
             

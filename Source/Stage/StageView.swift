@@ -1,6 +1,6 @@
 //
 //  StageView.swift
-//  Orbs
+//  nodes
 //
 //  Created by Alexander Bollbach on 7/27/17.
 //  Copyright © 2017 Alexander Bollbach. All rights reserved.
@@ -12,15 +12,15 @@ protocol StageViewDelegate: class {
     func interacted(event: StageEvent)
 }
 
-struct OrbMovementMetrics {
+struct NodeMovementMetrics {
     
     var id: String
-    let orbPosition: OrbPosition
+    let nodePosition: NodePosition
 }
 
 enum StageEvent {
-    case tapped(OrbPosition)
-    case OrbMoved(OrbMovementMetrics)
+    case tapped(NodePosition)
+    case NodeMoved(NodeMovementMetrics)
 }
 
 class StageView: UIView {
@@ -29,7 +29,7 @@ class StageView: UIView {
     
     weak var delegate: StageViewDelegate?
     
-    var orbs = [OrbView]()
+    var nodes = [NodeView]()
     
     init() {
         super.init(frame: .zero)
@@ -43,8 +43,8 @@ class StageView: UIView {
     
     func tapped(rec: UITapGestureRecognizer) {
         
-        let orbPosition = rec.location(in: self).orbPosition(inSize: self.bounds.size)
-        let tap: StageEvent = .tapped(orbPosition)
+        let nodePosition = rec.location(in: self).nodePosition(inSize: self.bounds.size)
+        let tap: StageEvent = .tapped(nodePosition)
         delegate?.interacted(event: tap)
     }
     
@@ -54,33 +54,33 @@ class StageView: UIView {
     
     
     
-    func addOrb(id: String) {
+    func addNode(id: String) {
         
-        let orbView = OrbView(id: id)
+        let nodeView = NodeView(id: id)
         
-        self.orbs.append(orbView)
-        self.addSubview(orbView)
+        self.nodes.append(nodeView)
+        self.addSubview(nodeView)
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(panned))
-        orbView.addGestureRecognizer(pan)
+        nodeView.addGestureRecognizer(pan)
     }
     
-    func update(with orbs: [Orb]) {
-        for orb in orbs { getOrbView(id: orb.id)?.configure(with: orb) }
+    func update(with nodes: [Node]) {
+        for node in nodes { getNodeView(id: node.id)?.configure(with: node) }
     }
     
-    func getOrbView(id: String) -> OrbView? { return (self.orbs.filter { $0.id == id }).first }
+    func getNodeView(id: String) -> NodeView? { return (self.nodes.filter { $0.id == id }).first }
     
     func panned(recognizer: UIPanGestureRecognizer) {
         
-        if let orb = recognizer.view as? OrbView {
+        if let node = recognizer.view as? NodeView {
             
             let point = recognizer.location(in: self)
             recognizer.view?.center = point
             
-            let orbPosition = point.orbPosition(inSize: self.bounds.size)
+            let nodePosition = point.nodePosition(inSize: self.bounds.size)
             
-            let event = StageEvent.OrbMoved(OrbMovementMetrics(id: orb.id, orbPosition: orbPosition))
+            let event = StageEvent.NodeMoved(NodeMovementMetrics(id: node.id, nodePosition: nodePosition))
             
             delegate?.interacted(event: event)
         }

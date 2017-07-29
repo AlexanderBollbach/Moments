@@ -10,10 +10,12 @@
 		291DF21F1F294B28003A9BC4 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291DF21E1F294B28003A9BC4 /* AudioEngine.swift */; };
 		291DF2211F294D08003A9BC4 /* StageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291DF2201F294D08003A9BC4 /* StageViewController.swift */; };
 		291DF2411F294D9D003A9BC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291DF2401F294D9D003A9BC4 /* AppDelegate.swift */; };
-		29305C351F2C17E100F7EE2D /* OrbsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29305C341F2C17E100F7EE2D /* OrbsTests.swift */; };
-		293323DA1F2A9D7B00EBE219 /* Orb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293323D91F2A9D7B00EBE219 /* Orb.swift */; };
-		293323DC1F2A9D9000EBE219 /* OrbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293323DB1F2A9D9000EBE219 /* OrbView.swift */; };
-		293323E11F2A9DF000EBE219 /* OrbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293323E01F2A9DF000EBE219 /* OrbManager.swift */; };
+		29305C351F2C17E100F7EE2D /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29305C341F2C17E100F7EE2D /* NodeTests.swift */; };
+		29305C3E1F2C2BCC00F7EE2D /* Loggables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29305C3D1F2C2BCC00F7EE2D /* Loggables.swift */; };
+		29305C411F2C379700F7EE2D /* MomentsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29305C401F2C379700F7EE2D /* MomentsCoordinator.swift */; };
+		293323DA1F2A9D7B00EBE219 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293323D91F2A9D7B00EBE219 /* Node.swift */; };
+		293323DC1F2A9D9000EBE219 /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293323DB1F2A9D9000EBE219 /* NodeView.swift */; };
+		293323E11F2A9DF000EBE219 /* NodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293323E01F2A9DF000EBE219 /* NodeManager.swift */; };
 		29B1C6301F2463DF00A3C514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29B1C62E1F2463DF00A3C514 /* Main.storyboard */; };
 		29B1C6461F24640200A3C514 /* MyAudioUnit3.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6451F24640200A3C514 /* MyAudioUnit3.m */; };
 		29B1C6491F24640200A3C514 /* AudioUnitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B1C6481F24640200A3C514 /* AudioUnitViewController.m */; };
@@ -60,12 +62,14 @@
 		291DF21E1F294B28003A9BC4 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		291DF2201F294D08003A9BC4 /* StageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageViewController.swift; sourceTree = "<group>"; };
 		291DF2401F294D9D003A9BC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		29305C321F2C17E100F7EE2D /* OrbsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrbsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		29305C341F2C17E100F7EE2D /* OrbsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbsTests.swift; sourceTree = "<group>"; };
+		29305C321F2C17E100F7EE2D /* NodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		29305C341F2C17E100F7EE2D /* NodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
 		29305C361F2C17E100F7EE2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		293323D91F2A9D7B00EBE219 /* Orb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orb.swift; sourceTree = "<group>"; };
-		293323DB1F2A9D9000EBE219 /* OrbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbView.swift; sourceTree = "<group>"; };
-		293323E01F2A9DF000EBE219 /* OrbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbManager.swift; sourceTree = "<group>"; };
+		29305C3D1F2C2BCC00F7EE2D /* Loggables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggables.swift; sourceTree = "<group>"; };
+		29305C401F2C379700F7EE2D /* MomentsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsCoordinator.swift; sourceTree = "<group>"; };
+		293323D91F2A9D7B00EBE219 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		293323DB1F2A9D9000EBE219 /* NodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
+		293323E01F2A9DF000EBE219 /* NodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeManager.swift; sourceTree = "<group>"; };
 		29B1C6251F2463DF00A3C514 /* Orbs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orbs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B1C62F1F2463DF00A3C514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		29B1C6361F2463DF00A3C514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -116,13 +120,30 @@
 			path = Misc;
 			sourceTree = "<group>";
 		};
-		29305C331F2C17E100F7EE2D /* OrbsTests */ = {
+		29305C331F2C17E100F7EE2D /* NodeTests */ = {
 			isa = PBXGroup;
 			children = (
-				29305C341F2C17E100F7EE2D /* OrbsTests.swift */,
+				29305C341F2C17E100F7EE2D /* NodeTests.swift */,
 				29305C361F2C17E100F7EE2D /* Info.plist */,
 			);
-			path = OrbsTests;
+			path = NodeTests;
+			sourceTree = "<group>";
+		};
+		29305C3C1F2C2BBB00F7EE2D /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				29305C3D1F2C2BCC00F7EE2D /* Loggables.swift */,
+			);
+			name = Misc;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		29305C3F1F2C378700F7EE2D /* Moments */ = {
+			isa = PBXGroup;
+			children = (
+				29305C401F2C379700F7EE2D /* MomentsCoordinator.swift */,
+			);
+			path = Moments;
 			sourceTree = "<group>";
 		};
 		293323DD1F2A9DA900EBE219 /* View */ = {
@@ -136,9 +157,9 @@
 		293323DE1F2A9DC500EBE219 /* Orbs */ = {
 			isa = PBXGroup;
 			children = (
-				293323E01F2A9DF000EBE219 /* OrbManager.swift */,
-				293323D91F2A9D7B00EBE219 /* Orb.swift */,
-				293323DB1F2A9D9000EBE219 /* OrbView.swift */,
+				293323E01F2A9DF000EBE219 /* NodeManager.swift */,
+				293323D91F2A9D7B00EBE219 /* Node.swift */,
+				293323DB1F2A9D9000EBE219 /* NodeView.swift */,
 			);
 			path = Orbs;
 			sourceTree = "<group>";
@@ -156,7 +177,7 @@
 			children = (
 				29B1C6271F2463DF00A3C514 /* Source */,
 				29B1C6431F24640200A3C514 /* MyAudioUnit3 */,
-				29305C331F2C17E100F7EE2D /* OrbsTests */,
+				29305C331F2C17E100F7EE2D /* NodeTests */,
 				29B1C6261F2463DF00A3C514 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -166,7 +187,7 @@
 			children = (
 				29B1C6251F2463DF00A3C514 /* Orbs.app */,
 				29B1C6421F24640200A3C514 /* MyAudioUnit3.appex */,
-				29305C321F2C17E100F7EE2D /* OrbsTests.xctest */,
+				29305C321F2C17E100F7EE2D /* NodeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,6 +195,8 @@
 		29B1C6271F2463DF00A3C514 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				29305C3F1F2C378700F7EE2D /* Moments */,
+				29305C3C1F2C2BBB00F7EE2D /* Misc */,
 				29B2A24B1F2AA03100DC30EE /* Stage */,
 				293323DF1F2A9DCF00EBE219 /* AudioEngine */,
 				293323DE1F2A9DC500EBE219 /* Orbs */,
@@ -208,9 +231,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		29305C311F2C17E100F7EE2D /* OrbsTests */ = {
+		29305C311F2C17E100F7EE2D /* NodeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 29305C3B1F2C17E100F7EE2D /* Build configuration list for PBXNativeTarget "OrbsTests" */;
+			buildConfigurationList = 29305C3B1F2C17E100F7EE2D /* Build configuration list for PBXNativeTarget "NodeTests" */;
 			buildPhases = (
 				29305C2E1F2C17E100F7EE2D /* Sources */,
 				29305C2F1F2C17E100F7EE2D /* Frameworks */,
@@ -221,9 +244,9 @@
 			dependencies = (
 				29305C381F2C17E100F7EE2D /* PBXTargetDependency */,
 			);
-			name = OrbsTests;
+			name = NodeTests;
 			productName = OrbsTests;
-			productReference = 29305C321F2C17E100F7EE2D /* OrbsTests.xctest */;
+			productReference = 29305C321F2C17E100F7EE2D /* NodeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		29B1C6241F2463DF00A3C514 /* Orbs */ = {
@@ -300,7 +323,7 @@
 			targets = (
 				29B1C6241F2463DF00A3C514 /* Orbs */,
 				29B1C6411F24640200A3C514 /* MyAudioUnit3 */,
-				29305C311F2C17E100F7EE2D /* OrbsTests */,
+				29305C311F2C17E100F7EE2D /* NodeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -336,7 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29305C351F2C17E100F7EE2D /* OrbsTests.swift in Sources */,
+				29305C351F2C17E100F7EE2D /* NodeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,14 +368,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				291DF2411F294D9D003A9BC4 /* AppDelegate.swift in Sources */,
-				293323E11F2A9DF000EBE219 /* OrbManager.swift in Sources */,
+				293323E11F2A9DF000EBE219 /* NodeManager.swift in Sources */,
+				29305C3E1F2C2BCC00F7EE2D /* Loggables.swift in Sources */,
 				29B1C6581F24699300A3C514 /* MyAudioUnit3.m in Sources */,
 				29B2A24D1F2AA03800DC30EE /* Stage.swift in Sources */,
 				291DF2211F294D08003A9BC4 /* StageViewController.swift in Sources */,
 				29B2A24F1F2AA07700DC30EE /* StageView.swift in Sources */,
 				291DF21F1F294B28003A9BC4 /* AudioEngine.swift in Sources */,
-				293323DC1F2A9D9000EBE219 /* OrbView.swift in Sources */,
-				293323DA1F2A9D7B00EBE219 /* Orb.swift in Sources */,
+				29305C411F2C379700F7EE2D /* MomentsCoordinator.swift in Sources */,
+				293323DC1F2A9D9000EBE219 /* NodeView.swift in Sources */,
+				293323DA1F2A9D7B00EBE219 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,7 +430,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 5UR7SPRNP3;
-				INFOPLIST_FILE = OrbsTests/Info.plist;
+				INFOPLIST_FILE = NodeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.org.me.OrbsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -422,7 +447,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 5UR7SPRNP3;
-				INFOPLIST_FILE = OrbsTests/Info.plist;
+				INFOPLIST_FILE = NodeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.org.me.OrbsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -601,13 +626,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		29305C3B1F2C17E100F7EE2D /* Build configuration list for PBXNativeTarget "OrbsTests" */ = {
+		29305C3B1F2C17E100F7EE2D /* Build configuration list for PBXNativeTarget "NodeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				29305C391F2C17E100F7EE2D /* Debug */,
 				29305C3A1F2C17E100F7EE2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		29B1C6201F2463DF00A3C514 /* Build configuration list for PBXProject "Orbs" */ = {
 			isa = XCConfigurationList;

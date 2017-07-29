@@ -11,7 +11,7 @@ import UIKit
 @testable import Orbs
 
 
-class OrbsTests: XCTestCase {
+class NodeTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -36,58 +36,58 @@ class OrbsTests: XCTestCase {
     }
     
     
-    func testOrbPositionFromCGPoint1() {
+    func testNodePositionFromCGPoint1() {
         
         let point = CGPoint(x: 10, y: 20)
         
         let size = CGSize(width: 100, height: 100)
         
-        let resultantOrbPosition = point.orbPosition(inSize: size)
+        let resultantNodePosition = point.nodePosition(inSize: size)
         
-        let expectatedOrbPosition = OrbPosition(x: 0.1, y: 0.2)
+        let expectatedNodePosition = NodePosition(x: 0.1, y: 0.2)
         
-        print(resultantOrbPosition)
+        print(resultantNodePosition)
         
-        XCTAssert(resultantOrbPosition == expectatedOrbPosition)
+        XCTAssert(resultantNodePosition == expectatedNodePosition)
         
     }
     
-    func testOrbPositionFromCGPoint2() {
+    func testNodePositionFromCGPoint2() {
         
         let point = CGPoint(x: 15, y: 3)
         
         let size = CGSize(width: 200, height: 300)
         
-        let resultantOrbPosition = point.orbPosition(inSize: size)
+        let resultantNodePosition = point.nodePosition(inSize: size)
         
-        let expectatedOrbPosition = OrbPosition(x: 0.075, y: 0.01)
+        let expectatedNodePosition = NodePosition(x: 0.075, y: 0.01)
         
-        print(resultantOrbPosition)
+        print(resultantNodePosition)
         
-        XCTAssert(resultantOrbPosition == expectatedOrbPosition)
+        XCTAssert(resultantNodePosition == expectatedNodePosition)
         
     }
     
-    func testCGPointFromOrbPosition1() {
+    func testCGPointFromNodePosition1() {
         
-        let initialOrbPosition = OrbPosition(x: 0.5, y: 0.5)
+        let initialNodePosition = NodePosition(x: 0.5, y: 0.5)
         
         let inSize = CGSize(width: 100, height: 100)
         
-        let resultantCGPoint = CGPoint(with: initialOrbPosition, inSize: inSize)
+        let resultantCGPoint = CGPoint(with: initialNodePosition, inSize: inSize)
         
         let expectedCGPoint = CGPoint(x: 50, y: 50)
         
         XCTAssert(resultantCGPoint == expectedCGPoint)
     }
     
-    func testCGPointFromOrbPosition2() {
+    func testCGPointFromNodePosition2() {
         
-        let initialOrbPosition = OrbPosition(x: 0.01, y: 0.95)
+        let initialNodePosition = NodePosition(x: 0.01, y: 0.95)
         
         let inSize = CGSize(width: 200, height: 1000)
         
-        let resultantCGPoint = CGPoint(with: initialOrbPosition, inSize: inSize)
+        let resultantCGPoint = CGPoint(with: initialNodePosition, inSize: inSize)
         
         let expectedCGPoint = CGPoint(x: 2, y: 950)
         

@@ -16,23 +16,23 @@ class Stage {
     
     let audioEngine = AudioEngine.shared
     
-    let orbManager = OrbManager.shared
+    let nodeManager = NodeManager.shared
     
     let stageView = StageView.shared
     
     
-    fileprivate func addOrb(at position : OrbPosition) {
+    fileprivate func addNode(at position : NodePosition) {
         
         let id = genID()
-        orbManager.addSinOrb(id: id, at: position)
-        stageView.addOrb(id: id)
+        nodeManager.addSinNode(id: id, at: position)
+        stageView.addNode(id: id)
         
         updateViewState()
     }
     
     
     func updateViewState() {
-        stageView.update(with: orbManager.allOrbs())
+        stageView.update(with: nodeManager.allNodes())
         stageView.layoutIfNeeded()
     }
     
@@ -41,8 +41,8 @@ class Stage {
         return String(IDMAker)
     }
     
-    func updateOrb(metrics: OrbMovementMetrics) {
-        orbManager.updateOrb(metrics: metrics)
+    func updateNode(metrics: NodeMovementMetrics) {
+        nodeManager.updateNode(metrics: metrics)
     }
 }
 
@@ -52,9 +52,9 @@ extension Stage: StageViewDelegate {
         
         switch event {
         case .tapped(let position):
-            addOrb(at: position)
-        case .OrbMoved(let metrics):
-            updateOrb(metrics: metrics)
+            addNode(at: position)
+        case .NodeMoved(let metrics):
+            updateNode(metrics: metrics)
             
             
         }

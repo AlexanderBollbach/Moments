@@ -10,7 +10,6 @@ import AVFoundation
 
 
 protocol Unit {
-    
     var identifier: String { get }
 }
 
@@ -35,8 +34,7 @@ class AudioEngine {
         
         hardwareFormat = audioEngine.outputNode.outputFormat(forBus: 0)
         audioEngine.connect(audioEngine.mainMixerNode, to: audioEngine.outputNode, format: hardwareFormat)
-        
-        
+
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
         } catch (let error) {
@@ -70,8 +68,6 @@ class AudioEngine {
         let stereoFormat = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 2)
         
         buildSinGenerator { unit in
-            
-           
             self.audioEngine.attach(unit)
             self.audioEngine.connect(unit, to: self.audioEngine.mainMixerNode, format: stereoFormat)
 
@@ -93,26 +89,21 @@ class AudioEngine {
             completed(unit!)
         }
     }
+
     
     
- 
-    
-    
-    func updateUnit(orb: OrbAudio) {
-        
-        
-        switch orb {
-        case let orb as SinAudio:
-            updateSinUnit(orb: orb)
+    func updateUnit(node: NodeAudio) {
+        switch node {
+        case let node as SinAudio:
+            updateSinUnit(node: node)
         default: break
         }
-        
     }
     
     
-    private func updateSinUnit(orb: SinAudio) {
-        
-        setFrequency(identifier: orb.id, value: orb.frequency)
+    private func updateSinUnit(node: SinAudio) {
+        setFrequency(identifier: node.id, value: node.frequency)
+        setVolume(identifier: node.id, value: node.volume)
     }
     
     
@@ -129,6 +120,21 @@ class AudioEngine {
         let paramTree = auUnit.parameterTree
         
         let freqParam = paramTree?.value(forKey: "frequency") as? AUParameter
+        
+        if let freq = freqParam {
+            freq.value = AUValue(value)
+        }
+    }
+    
+    private func setVolume(identifier: String, value: Double) {
+        
+        guard let sinUnit = self.units[identifier] as? SinUnit else { return }
+        
+        let auUnit = sinUnit.auAudioUnit
+        
+        let paramTree = auUnit.parameterTree
+        
+        let freqParam = paramTree?.value(forKey: "volume") as? AUParameter
         
         if let freq = freqParam {
             freq.value = AUValue(value)
