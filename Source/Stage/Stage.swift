@@ -21,12 +21,10 @@ class Stage {
     let stageView = StageView.shared
     
     
-    fileprivate func addOrb() {
+    fileprivate func addOrb(at position : OrbPosition) {
         
         let id = genID()
-        
-        orbManager.addSinOrb(id: id)
-        
+        orbManager.addSinOrb(id: id, at: position)
         stageView.addOrb(id: id)
         
         updateViewState()
@@ -53,8 +51,8 @@ extension Stage: StageViewDelegate {
     func interacted(event: StageEvent) {
         
         switch event {
-        case .tapped:
-            addOrb()
+        case .tapped(let position):
+            addOrb(at: position)
         case .OrbMoved(let metrics):
             updateOrb(metrics: metrics)
             

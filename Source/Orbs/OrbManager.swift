@@ -19,9 +19,10 @@ class OrbManager {
     var orbs = [Orb]()
     
     
-    func addSinOrb(id: String) {
+    func addSinOrb(id: String, at position: OrbPosition = OrbPosition.defaultPosition) {
         
         let orb = SinOrb(id: id)
+        orb.position = position
         
         self.orbs.append(orb)
         
@@ -39,6 +40,9 @@ class OrbManager {
     func updateOrb(metrics: OrbMovementMetrics) {
         
         guard let orb = getOrb(id: metrics.id) else { return }
+        
+        orb.position = metrics.orbPosition
+        
         updateOrbSettings(orb: orb, metrics: metrics)
         engine.updateUnit(orb: orb)
     }

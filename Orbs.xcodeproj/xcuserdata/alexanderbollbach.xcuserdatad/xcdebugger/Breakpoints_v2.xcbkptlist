@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyAudioUnit3/MyAudioUnit3.m"
-            timestampString = "522906283.422319"
+            filePath = "Source/Stage/StageView.swift"
+            timestampString = "522984065.692286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "-initWithComponentDescription:options:error:"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "tapped(rec:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

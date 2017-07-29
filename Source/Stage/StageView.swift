@@ -19,7 +19,7 @@ struct OrbMovementMetrics {
 }
 
 enum StageEvent {
-    case tapped
+    case tapped(OrbPosition)
     case OrbMoved(OrbMovementMetrics)
 }
 
@@ -42,7 +42,10 @@ class StageView: UIView {
     }
     
     func tapped(rec: UITapGestureRecognizer) {
-        delegate?.interacted(event: .tapped)
+        
+        let orbPosition = rec.location(in: self).orbPosition(inSize: self.bounds.size)
+        let tap: StageEvent = .tapped(orbPosition)
+        delegate?.interacted(event: tap)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -56,7 +59,6 @@ class StageView: UIView {
         let orbView = OrbView(id: id)
         
         self.orbs.append(orbView)
-        
         self.addSubview(orbView)
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(panned))
@@ -64,10 +66,7 @@ class StageView: UIView {
     }
     
     func update(with orbs: [Orb]) {
-        
-        for orb in orbs {
-            getOrbView(id: orb.id)?.configure(with: orb)
-        }
+        for orb in orbs { getOrbView(id: orb.id)?.configure(with: orb) }
     }
     
     func getOrbView(id: String) -> OrbView? { return (self.orbs.filter { $0.id == id }).first }

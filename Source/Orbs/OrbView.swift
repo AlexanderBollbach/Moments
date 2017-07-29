@@ -20,20 +20,19 @@ class OrbView: UIView {
         
         super.init(frame: .zero)
         
+        translatesAutoresizingMaskIntoConstraints = false
+        
         self.backgroundColor = .red
     }
     
-    func configure(with config: OrbViewConfig?) {
+    func configure(with config: OrbViewConfig) {
         
         guard let sv = superview else { return }
-        
-        guard let config = config else { return }
-        
-        self.translatesAutoresizingMaskIntoConstraints = false
-        
+ 
         let size = config.size.sizeInPoints
         
-        self.frame.size = CGSize(width: sv.frame.size.width * size, height: sv.frame.size.height * size)
+        frame.size = CGSize(width: sv.frame.size.width * size,
+                            height: sv.frame.size.height * size)
         
         self.center = CGPoint(with: config.position, inSize: sv.frame.size)
     }
@@ -52,9 +51,10 @@ extension CGPoint {
     
     func orbPosition(inSize: CGSize) -> OrbPosition {
         let orbX = Double(self.x / inSize.width)
-        let orbY = Double(self.x / inSize.height)
+        let orbY = Double(self.y / inSize.height)
         return OrbPosition(x: orbX, y: orbY)
     }
 }
+
 
 

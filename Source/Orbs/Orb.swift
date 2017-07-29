@@ -44,10 +44,13 @@ class SinOrb: Orb, SinAudio {
 }
 
 
-struct OrbPosition {
+struct OrbPosition: Equatable {
     let x: Double
     let y: Double
+    
+    static let defaultPosition = OrbPosition(x: 0.5, y: 0.5)
 }
+func ==(lhs: OrbPosition, rhs: OrbPosition) -> Bool { return lhs.x == rhs.x  && lhs.y == rhs.y }
 
 
 
