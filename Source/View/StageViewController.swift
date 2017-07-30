@@ -30,7 +30,8 @@ class StageViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        Stage.shared.audioEngine.run()
+        Stage.shared.run()
+        
     }
     
     override func viewDidLayoutSubviews() {

@@ -136,7 +136,11 @@ const AudioUnitParameterID volumeAddress = 1;
     return YES;
 }
 
-- (void)deallocateRenderResources { [super deallocateRenderResources]; }
+- (void)deallocateRenderResources {
+    [super deallocateRenderResources];
+    
+    printf("deallocate \n");
+}
 
 
 
@@ -204,7 +208,7 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
         // Gen Sin wave
         for (int frame = 0; frame < frameCount; frame++) {
 
-            float val = sin(phase) * vol * 0.4;
+            float val = sin(phase) * vol * 0.1;
 
             phase = phase + phaseIncrement;
             

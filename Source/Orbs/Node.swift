@@ -9,49 +9,102 @@
 import UIKit
 
 
-protocol Node: NodeViewConfig, AudioMetrics {
+
+
+
+// NODE
+
+protocol Node {
     var id: String { get }
     
     var size: NodeSize { get set }
     var position: NodePosition { get set }
+    var health: Double { get set }
+    
+    
+    var targetPosition: NodePosition? { get set }
+    var targetHealth: Double? { get set }
+    
+    
+    var shouldDie: Bool { get set }
 }
 
-struct BaseNode: Node, NodeViewConfig {
+extension Node {
     
-    let id: String
-
-    // view
-    var size: NodeSize = .small
-    var position = NodePosition(x: 0.5, y: 0.5)
-}
-
-
-
-
-
-
-struct ToneNode: Node, ToneNodeAudioMetrics {
-    
-    let id: String
-    
-    // audio
-    var volume = 0.0
-    var frequency = 0.0
-    
-    // view
-    var size: NodeSize = .small
-    var position = NodePosition(x: 0.5, y: 0.5)
-    
-    init(id: String, volume: Double = 0, frequency: Double = 0) {
-        self.id = id
-        self.volume = volume
-        self.frequency = frequency
+    func isNearTargetPosition() -> Bool {
+        guard let targetPos = self.targetPosition else { return false }
+        return abs(targetPos.x - self.position.x) < 0.001 && abs(targetPos.y - self.position.y) < 0.001
     }
+    
+    
+    func isNearTargetHealth() -> Bool {
+        guard let targetHealth = self.targetHealth else { return false }
+        return abs(targetHealth - self.health) < 0.001
+    }
+    
+    
+    
+}
+
+struct BaseNode: Node {
+    
+    let id: String
+
+    // view
+    var size: NodeSize = .small
+    var position = NodePosition(x: 0.5, y: 0.5)
+    
+    
+    var targetPosition: NodePosition?
+    
+    var health: Double = 1.0 {
+        didSet {
+            if health > 1.0 {
+                self.health = 1.0
+            }
+            
+            if health < 0.0 {
+                self.health = 0.0
+            }
+        }
+    }
+    
+    var targetHealth: Double?
+    
+    var shouldDie: Bool = false
 }
 
 
+struct ToneNode: Node {
+    
+    let id: String
 
-
+    var size: NodeSize = .small
+    var position = NodePosition(x: 0.5, y: 0.5)
+    
+    init(id: String) {
+        self.id = id
+    }
+    
+    
+    var targetPosition: NodePosition?
+    
+    var health: Double = 1.0 {
+        didSet {
+            if health > 1.0 {
+                self.health = 1.0
+            }
+            
+            if health < 0.0 {
+                self.health = 0.0
+            }
+        }
+    }
+    
+    var targetHealth: Double?
+    
+    var shouldDie: Bool = false
+}
 
 
 
@@ -61,6 +114,7 @@ struct ToneNode: Node, ToneNodeAudioMetrics {
 
 
 // VIEW
+
 struct NodePosition: Equatable {
     let x: Double
     let y: Double
@@ -89,24 +143,57 @@ enum NodeSize {
     }
 }
 
-protocol NodeViewConfig {
+
+typealias NodeHealth = Double
+
+struct ToneNodeViewMetrics {
+    let size: NodeSize
+    let position: NodePosition
+    let health: NodeHealth
+}
+
+enum NodeViewMetricsValues {
     
-    var size: NodeSize { get }
-    var position: NodePosition { get }
+    case baseNode
+    case toneNode(ToneNodeViewMetrics)
 }
 
-protocol AudioMetrics {
-    var id: String { get }
+struct NodeViewMetrics {
+    let id: String
+    let values: NodeViewMetricsValues
 }
 
-protocol ToneNodeAudioMetrics: AudioMetrics {
-    var frequency: Double { get }
-    var volume: Double { get }
+
+
+
+
+
+
+
+
+
+
+
+
+// AUDIO
+
+
+struct ToneNodeAudioMetrics {
+    let volume: Double
+    let frequency: Double
 }
 
-enum NodeAudio {
-    case toneNode(ToneNodeAudioMetrics)
+enum NodeAudioMetricsValues {
+    case baseNode
+    case ToneNode(ToneNodeAudioMetrics)
 }
+
+struct NodeAudioMetrics {
+    let id: String
+    let values: NodeAudioMetricsValues
+}
+
+
 
 
 

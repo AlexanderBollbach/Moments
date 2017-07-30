@@ -24,11 +24,23 @@ class MomentsCoordinator {
     
     func logMoments() { Logger.log(moments, message: "Moments: ") }
     
-    func nextMoment() -> Moment {
+    func nextMoment() -> Moment? {
+
         let index = momentIndex
         momentIndex += 1
         if momentIndex > moments.count - 1 { momentIndex = 0 }
-        return moments[index]
+        
+        if index <= moments.count - 1 {
+            return moments[index]
+        }
+        return nil
+    }
+    
+    
+    func clear() {
+
+        momentIndex = 0
+        moments = []
     }
 }
 
