@@ -32,18 +32,92 @@ enum StageEvent {
 class StageView: UIView {
     
     static let shared = StageView()
-    
     weak var delegate: StageViewDelegate?
     
     var nodes = [NodeView]()
     
     init() { super.init(frame: .zero)
-        
         backgroundColor = UIColor.blue.withAlphaComponent(0.4)
+        configureControls()
+    }
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
+    
+    
+    func addNode(id: String) {
+        
+        let nodeView = NodeView(id: id)
+        
+        self.nodes.append(nodeView)
+        self.addSubview(nodeView)
+        
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(panned))
+        nodeView.addGestureRecognizer(pan)
+    }
+    
+    
+    func add(node: Node) {
+        
+        switch node {
+        case let node as ToneNode:
+            add(toneNode: node)
+        default:
+            break
+        }
+    }
+    
+    func add(toneNode: ToneNode) {
+     
+        let nodeView = NodeView(id: toneNode.id)
+        
+        nodes.append(nodeView)
+        addSubview(nodeView)
+        
+        nodeView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panned)))
+    }
+    
+    
+    func update(with nodes: [Node]) {
+        nodes.forEach { getNodeView(id: $0.id)?.configure(with: $0) }
+    }
+    
+
+    func replaceNodes(with newNodes: [Node]) {
+        removeNodes() ; newNodes.forEach { add(node: $0) }
+        
+        update(with: newNodes)
+        
+        layoutIfNeeded()
+    }
+    
+    func removeNodes() {
+        self.nodes = []
+        subviews.forEach { if let n = $0 as? NodeView { n.removeFromSuperview() } }
+    }
+    
+    func getNodeView(id: String) -> NodeView? { return (self.nodes.filter { $0.id == id }).first }
+    
+    func panned(recognizer: UIPanGestureRecognizer) {
+        
+        if let node = recognizer.view as? NodeView {
+            
+            let point = recognizer.location(in: self)
+            recognizer.view?.center = point
+            
+            let nodePosition = point.nodePosition(inSize: self.bounds.size)
+            
+            let event = StageEvent.NodeMoved(NodeMovementMetrics(id: node.id, nodePosition: nodePosition))
+            
+            delegate?.interacted(event: event)
+        }
+    }
+    
+    
+    private func configureControls() {
+        
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
         self.addGestureRecognizer(tap)
- 
         
         
         let titles = ["add moment", "log moments", "next moment"]
@@ -67,7 +141,6 @@ class StageView: UIView {
         sv.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
-    
     func buttonTapped(sender: UIButton) {
         
         switch sender.tag {
@@ -81,49 +154,11 @@ class StageView: UIView {
         }
         
     }
-    
-    
     func tapped(rec: UITapGestureRecognizer) {
         
         let nodePosition = rec.location(in: self).nodePosition(inSize: self.bounds.size)
         let tap: StageEvent = .tapped(nodePosition)
         delegate?.interacted(event: tap)
-    }
-    
-    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
-    
-    
-    func addNode(id: String) {
-        
-        let nodeView = NodeView(id: id)
-        
-        self.nodes.append(nodeView)
-        self.addSubview(nodeView)
-        
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(panned))
-        nodeView.addGestureRecognizer(pan)
-    }
-    
-    func update(with nodes: [Node]) {
-        for node in nodes { getNodeView(id: node.id)?.configure(with: node) }
-    }
-    
-    func getNodeView(id: String) -> NodeView? { return (self.nodes.filter { $0.id == id }).first }
-    
-    func panned(recognizer: UIPanGestureRecognizer) {
-        
-        if let node = recognizer.view as? NodeView {
-            
-            let point = recognizer.location(in: self)
-            recognizer.view?.center = point
-            
-            let nodePosition = point.nodePosition(inSize: self.bounds.size)
-            
-            let event = StageEvent.NodeMoved(NodeMovementMetrics(id: node.id, nodePosition: nodePosition))
-            
-            delegate?.interacted(event: event)
-        }
     }
 }
 

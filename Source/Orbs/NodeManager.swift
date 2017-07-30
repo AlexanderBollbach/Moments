@@ -16,6 +16,16 @@ class NodeManager {
     
     func allNodes() -> [Node] { return self.nodes }
     
+    func add(node: Node) {
+        
+        switch node {
+        case let node as ToneNode:
+            addToneNode(id: node.id)
+        default:
+            break
+        }
+    }
+    
     func addToneNode(id: String, at position: NodePosition = NodePosition.defaultPosition) {
         var node = ToneNode(id: id)
         node.position = position
@@ -23,14 +33,7 @@ class NodeManager {
     }
     
     func update(newNodes: [Node]) {
-        
-        for newNode in newNodes {
-            switch newNode {
-            case let newNode as ToneNode:
-                updateToneNode(with: newNode)
-            default: break
-            }
-        }
+        self.nodes = newNodes
     }
 
     

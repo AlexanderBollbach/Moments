@@ -204,13 +204,11 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
         // Gen Sin wave
         for (int frame = 0; frame < frameCount; frame++) {
 
-            float val = sin(phase) * vol;
+            float val = sin(phase) * vol * 0.4;
 
             phase = phase + phaseIncrement;
             
-            if (phase >= (2 * M_PI)) {
-                phase = phase - (2 * M_PI);
-            }
+            if (phase >= (2 * M_PI)) { phase = phase - (2 * M_PI); }
 
             outL[frame] = val;
             outR[frame] = val;

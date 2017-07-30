@@ -8,73 +8,67 @@
 
 import AVFoundation
 
-
-protocol Unit {
-    var identifier: String { get }
+protocol NodeUnit {
+    var id: String { get }
+    
+    var auAudioUnit: AUAudioUnit { get }
+    var avAudioUnit: AVAudioUnit { get }
 }
 
-struct SinUnit: Unit {
-    
-    let identifier: String
+protocol Level: NodeUnit {
+    var volume: Double { get set }
+}
+
+protocol Frequency: NodeUnit {
+    var frequency: Double { get set }
+}
+
+struct BaseNodeUnit: NodeUnit {
+    let id: String
     
     var auAudioUnit: AUAudioUnit
     var avAudioUnit: AVAudioUnit
 }
 
-class AudioEngine {
+struct ToneNodeUnit: NodeUnit, Level, Frequency {
+    let id: String
     
-    static let shared = AudioEngine()
+    var auAudioUnit: AUAudioUnit
+    var avAudioUnit: AVAudioUnit
+    
+    var frequency: Double
+    var volume: Double
+}
+
+class AudioEngine {
     
     let audioEngine = AVAudioEngine()
     var hardwareFormat: AVAudioFormat!
+    let stereoFormat = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 2)
     
-    var units = [String: Unit]()
+    var units = [NodeUnit]()
     
     init() {
-        
         hardwareFormat = audioEngine.outputNode.outputFormat(forBus: 0)
         audioEngine.connect(audioEngine.mainMixerNode, to: audioEngine.outputNode, format: hardwareFormat)
 
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-        } catch (let error) {
-            print("\(error)")
-            return
-        }
-        
-        do {
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch (let error) {
-            print("\(error)")
-            return
-        }
+        do { try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback) } catch (let error) { print("\(error)")
+            return }
+        do { try AVAudioSession.sharedInstance().setActive(true) } catch (let error) { print("\(error)")
+            return }
         
         let desc = AudioComponentDescription(componentType: kAudioUnitType_Generator, componentSubType: 0x6d617533, componentManufacturer: 0x4d415533, componentFlags: 0, componentFlagsMask: 0)
         
         AUAudioUnit.registerSubclass(MyAudioUnit3.self, as: desc, name: "MyAudioUnit3", version: 1)
-        
     }
     
-    func run() {
-        do {
-            try audioEngine.start()
-        } catch (let error) {
-            fatalError("\(error)")
-        }
-    }
+    func run() { do { try audioEngine.start() } catch (let error) { fatalError("\(error)") } }
     
     func addToneGenerator(id: String) {
-        
-        let stereoFormat = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 2)
-        
         buildToneGenerator { unit in
             self.audioEngine.attach(unit)
-            self.audioEngine.connect(unit, to: self.audioEngine.mainMixerNode, format: stereoFormat)
-
-            let newUnit = SinUnit(identifier: id, auAudioUnit: unit.auAudioUnit, avAudioUnit: unit)
-            
-            self.units[id] = newUnit
-
+            self.audioEngine.connect(unit, to: self.audioEngine.mainMixerNode, format: self.stereoFormat)
+            self.units.append(ToneNodeUnit(id: id, auAudioUnit: unit.auAudioUnit, avAudioUnit: unit, frequency: 0, volume: 0))
         }
     }
     
@@ -88,58 +82,52 @@ class AudioEngine {
             completed(unit!)
         }
     }
+    
+    
+    func update(newNodes: [Node]) {
+        
+        newNodes.forEach { updateUnit(node: $0) }
+        
+        muteAllNotInSet(nodes: newNodes)
+    }
+    
+    
+    func muteAllNotInSet(nodes: [Node]) {
+        
+        for unit in units {
+            if !nodes.contains(where: { $0.id == unit.id }) {
+                if let volumeUnit = unit as? ToneNodeUnit {
+                    self.mute(unit: volumeUnit)
+                }
+            }
+        }
+    }
+    
+    
+    func mute(unit: Level) {
+        set(id: unit.id, auParam: "volume", value: 0)
+    }
+    
 
-    
-    
     func updateUnit(node: AudioMetrics) {
         switch node {
-
-        case let node as ToneNodeAudioMetrics:
-            updateSinUnit(node: node)
+        case let node as ToneNodeAudioMetrics: updateToneNodeUnit(node: node)
         default: break
         }
     }
     
-    
-    private func updateSinUnit(node: ToneNodeAudioMetrics) {
-        setFrequency(identifier: node.id, value: node.frequency)
-        setVolume(identifier: node.id, value: node.volume)
+    private func updateToneNodeUnit(node: ToneNodeAudioMetrics) {
+        set(id: node.id, auParam: "frequency", value: node.frequency)
+        set(id: node.id, auParam: "volume", value: node.volume)
     }
-    
-    
-    
-    
-    
-    
-    private func setFrequency(identifier: String, value: Double) {
+  
+    private func set(id: String, auParam: String, value: Double) {
         
-        guard let sinUnit = self.units[identifier] as? SinUnit else { return }
+        guard let index = (self.units.index { $0.id == id }) else { return }
         
-        let auUnit = sinUnit.auAudioUnit
-        
-        let paramTree = auUnit.parameterTree
-        
-        let freqParam = paramTree?.value(forKey: "frequency") as? AUParameter
-        
-        if let freq = freqParam {
-            freq.value = AUValue(value)
-        }
+        let auUnit = self.units[index].auAudioUnit
+
+        let freqParam = auUnit.parameterTree?.value(forKey: auParam) as? AUParameter
+        freqParam?.value = AUValue(value)
     }
-    
-    private func setVolume(identifier: String, value: Double) {
-        
-        guard let sinUnit = self.units[identifier] as? SinUnit else { return }
-        
-        let auUnit = sinUnit.auAudioUnit
-        
-        let paramTree = auUnit.parameterTree
-        
-        let freqParam = paramTree?.value(forKey: "volume") as? AUParameter
-        
-        if let freq = freqParam {
-            freq.value = AUValue(value)
-        }
-    }
-    
-    
 }

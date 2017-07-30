@@ -13,7 +13,7 @@ class Stage {
     var IDMAker = 0
     static let shared = Stage()
     
-    let audioEngine = AudioEngine.shared
+    let audioEngine = AudioEngine()
     let nodeManager = NodeManager.shared
     let stageView = StageView.shared
     let momentsCoordinator = MomentsCoordinator()
@@ -44,13 +44,12 @@ class Stage {
         let newNodes = moment.nodes
         
         nodeManager.update(newNodes: newNodes)
-        stageView.update(with: newNodes)
+        stageView.replaceNodes(with: newNodes)
         
-        newNodes.forEach {
-            if let audio = nodeManager.audioForNode(id: $0.id) { audioEngine.updateUnit(node: audio) }
-        }
-        
+        audioEngine.update(newNodes: newNodes)
     }
+    
+    
 }
 
 extension Stage: StageViewDelegate {

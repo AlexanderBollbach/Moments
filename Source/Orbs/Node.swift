@@ -9,14 +9,14 @@
 import UIKit
 
 
-protocol Node: NodeViewConfig {
+protocol Node: NodeViewConfig, AudioMetrics {
     var id: String { get }
     
     var size: NodeSize { get set }
     var position: NodePosition { get set }
 }
 
-struct BaseNode: Node, AudioMetrics, NodeViewConfig {
+struct BaseNode: Node, NodeViewConfig {
     
     let id: String
 
@@ -24,6 +24,8 @@ struct BaseNode: Node, AudioMetrics, NodeViewConfig {
     var size: NodeSize = .small
     var position = NodePosition(x: 0.5, y: 0.5)
 }
+
+
 
 
 
