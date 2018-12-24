@@ -1,11 +1,3 @@
-//
-//  MyAudioUnit3AudioUnit.m
-//  MyAudioUnit3
-//
-//  Created by Alexander Bollbach on 7/23/17.
-//  Copyright © 2017 Alexander Bollbach. All rights reserved.
-//
-
 #import "MyAudioUnit3.h"
 #import <AVFoundation/AVFoundation.h>
 
@@ -30,20 +22,15 @@
 const AudioUnitParameterID frequencyAddress = 0;
 const AudioUnitParameterID volumeAddress = 1;
 
-
-
-
-
-
-
-
-- (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription options:(AudioComponentInstantiationOptions)options error:(NSError **)outError {
+- (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription
+                                     options:(AudioComponentInstantiationOptions)options
+                                       error:(NSError **)outError {
+    
     self = [super initWithComponentDescription:componentDescription options:options error:outError];
     
     if (self == nil) { return nil; }
     
-    AudioUnitParameterOptions flags = kAudioUnitParameterFlag_IsWritable |
-    kAudioUnitParameterFlag_IsReadable;
+    AudioUnitParameterOptions flags = kAudioUnitParameterFlag_IsWritable | kAudioUnitParameterFlag_IsReadable;
     
     AUParameter *param1 = [AUParameterTree createParameterWithIdentifier:@"frequency"
                                                                     name:@"Frequency"
@@ -69,12 +56,7 @@ const AudioUnitParameterID volumeAddress = 1;
     
     param1.value = 0;
     
-    
-    
-    _parameterTree = [AUParameterTree createTreeWithChildren:@[ param1, param2 ]];
-    
-    
-    
+    _parameterTree = [AUParameterTree createTreeWithChildren:@[param1, param2]];
     
     __weak MyAudioUnit3 * weak = self;
     
@@ -85,8 +67,10 @@ const AudioUnitParameterID volumeAddress = 1;
         switch (param.address) {
             case frequencyAddress:
                 return (AUValue)strong->frequency;
+                
             case volumeAddress:
                 return (AUValue)strong->volume;
+                
             default:
                 return (AUValue) 0.0;
         }
@@ -99,12 +83,13 @@ const AudioUnitParameterID volumeAddress = 1;
         switch (param.address) {
                 
             case frequencyAddress:
-                
                 strong->frequency = value;
                 break;
+                
             case volumeAddress:
                 strong->volume = value;
                 break;
+                
             default:
                 break;
         }
@@ -115,13 +100,9 @@ const AudioUnitParameterID volumeAddress = 1;
     
     _outputBus = [[AUAudioUnitBus alloc] initWithFormat:defaultFormat error:nil];
     _outputBusArray = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self busType:AUAudioUnitBusTypeOutput busses: @[_outputBus]];
-
+    
     return self;
 }
-
-
-
-
 
 
 - (AUAudioUnitBusArray *)outputBusses { return _outputBusArray; }
@@ -138,16 +119,13 @@ const AudioUnitParameterID volumeAddress = 1;
 
 - (void)deallocateRenderResources {
     [super deallocateRenderResources];
-    
-    printf("deallocate \n");
 }
 
-
-
-
-
-// RENDERING
-void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount frameCount, bool zeroFill, AudioBufferList const * originalAudioBufferList) {
+void prepareOutputBufferList(
+                             AudioBufferList* outBufferList,
+                             AVAudioFrameCount frameCount, bool zeroFill,
+                             AudioBufferList const * originalAudioBufferList
+                             ) {
     
     UInt32 byteSize = frameCount * sizeof(float);
     
@@ -163,19 +141,15 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
             outBufferList->mBuffers[i].mData = originalAudioBufferList->mBuffers[i].mData;
         }
         
-        if (zeroFill) { memset(outBufferList->mBuffers[i].mData, 0, byteSize); }
+        if (zeroFill) {
+            memset(outBufferList->mBuffers[i].mData, 0, byteSize);
+        }
     }
 }
 
 
-
-
-
-
-// Get Render Block
 - (AUInternalRenderBlock)internalRenderBlock {
     
-   
     // memory
     AUValue * frequencyCapture = &frequency;
     AUValue * volumeCapture = &volume;
@@ -185,8 +159,6 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
     __block float phase = 0.0;
     float SR = 44100;
     
-    
-    // RENDER Block
     return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AVAudioFrameCount frameCount, NSInteger outputBusNumber, AudioBufferList *outputData, const AURenderEvent *realtimeEventListHead, AURenderPullInputBlock pullInputBlock) {
         
         
@@ -201,23 +173,22 @@ void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount f
         
         float freq = *frequencyCapture;
         float vol = *volumeCapture;
-
+        
         double phaseIncrement = 2 * M_PI * freq / SR;
         
-
+        
         // Gen Sin wave
         for (int frame = 0; frame < frameCount; frame++) {
-
+            
             float val = sin(phase) * vol * 0.1;
-
+            
             phase = phase + phaseIncrement;
             
             if (phase >= (2 * M_PI)) { phase = phase - (2 * M_PI); }
-
+            
             outL[frame] = val;
             outR[frame] = val;
         }
-
         
         // All good
         return noErr;

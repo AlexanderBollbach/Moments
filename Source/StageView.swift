@@ -1,13 +1,4 @@
-//
-//  StageView.swift
-//  nodes
-//
-//  Created by Alexander Bollbach on 7/27/17.
-//  Copyright © 2017 Alexander Bollbach. All rights reserved.
-//
-
 import UIKit
-
 
 struct ViewMovement {
     let id: String
@@ -19,14 +10,10 @@ enum StageEvent {
     case tapped(NodePosition)
 }
 
-
 protocol StageViewDelegate: class {
-    
     func interacted(event: StageEvent)
     func menuButtonTapped(button: MenuButton)
 }
-
-
 
 enum MenuButton {
     case addMoment
@@ -35,14 +22,9 @@ enum MenuButton {
     case clear
 }
 
-
-
-
-
-
 class StageView: UIView {
     
-    static let shared = StageView()
+    //    static let shared = StageView()
     weak var delegate: StageViewDelegate?
     
     var nodes = [NodeView]()
@@ -56,15 +38,6 @@ class StageView: UIView {
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    
-    
-
-    
-    
-    
-    
-
-    
     func add(id: String) -> NodeView {
         
         let nodeView = NodeView(id: id)
@@ -76,12 +49,6 @@ class StageView: UIView {
         
         return nodeView
     }
-    
-    
-  
-
-    
-    
     
     func update(with metrics: [NodeViewMetrics]) {
         
@@ -109,22 +76,15 @@ class StageView: UIView {
             node?.configure(with: $0)
         }
     }
-
- 
     
     func flareAll() {
         nodes.forEach { $0.flare() }
     }
     
+    func getNodeView(id: String) -> NodeView? {
+        return nodes.first(where: { $0.id == id })
+    }
     
-    func getNodeView(id: String) -> NodeView? { return (self.nodes.filter { $0.id == id }).first }
-    
-
-    
-    
-    
-    
-    // Node Moved
     func panned(recognizer: UIPanGestureRecognizer) {
         
         guard let node = recognizer.view as? NodeView else { return }
@@ -136,10 +96,6 @@ class StageView: UIView {
         delegate?.interacted(event: StageEvent.moved(viewMovement))
     }
     
-    
-    
-    
-    
     // HELPERS
     
     func remove(id: String) {
@@ -148,20 +104,6 @@ class StageView: UIView {
         node.removeFromSuperview()
         self.nodes.remove(at: index)
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
- 
-    // CONTROLS
     
     private func configureControls() {
         
@@ -172,13 +114,18 @@ class StageView: UIView {
         let titles = ["add moment", "log moments", "next moment", "clear"]
         let buttons = [UIButton(), UIButton(), UIButton(), UIButton()]
         
-        for (n,c) in buttons.enumerated() {
+        for (n, c) in buttons.enumerated() {
             c.tag = n
             c.setTitleColor(UIColor.white, for: .highlighted)
             c.setTitleColor(.black, for: .normal)
             c.setTitle(titles[n], for: .normal)
             c.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-            c.backgroundColor = UIColor(colorLiteralRed: Float(Double(n) * 0.5), green: 0.2, blue: Float(Double(n) * 0.3), alpha: 1)
+            c.backgroundColor = UIColor(
+                colorLiteralRed: Float(Double(n) * 0.5),
+                green: 0.2,
+                blue: Float(Double(n) * 0.3),
+                alpha: 1
+            )
         }
         
         let sv = UIStackView(arrangedSubviews: buttons)
@@ -209,8 +156,8 @@ class StageView: UIView {
         }
         
     }
-   func tapped(rec: UITapGestureRecognizer) {
-        
+    
+    func tapped(rec: UITapGestureRecognizer) {
         let nodePosition = rec.location(in: self).nodePosition(inSize: self.bounds.size)
         let tap: StageEvent = .tapped(nodePosition)
         delegate?.interacted(event: tap)

@@ -8,8 +8,6 @@
 
 #import <AudioToolbox/AudioToolbox.h>
 
-
-
 @interface MyAudioUnit3 : AUAudioUnit
 
 @end

@@ -1,31 +1,25 @@
-//
-//  MomentsCoordinator.swift
-//  Orbs
-//
-//  Created by Alexander Bollbach on 7/28/17.
-//  Copyright © 2017 Alexander Bollbach. All rights reserved.
-//
-
 import Foundation
 
-class MomentsCoordinator {
-    
-    var momentIndex = 0
+struct Moment {
+    let nodes: [Node]
+}
 
-    var moments = [Moment]()
+class MomentsController {
+    
+    private var momentIndex = 0
+    private var moments = [Moment]()
     
     func addMoment(nodes: [Node]) {
-        let newMoment = Moment(nodes: nodes)
-        moments.append(newMoment)
-        
-        Logger.log(moments, message: "added a new moment")
-        
+        moments.append(Moment(nodes: nodes))
     }
     
-    func logMoments() { Logger.log(moments, message: "Moments: ") }
+    func logMoments() {
+        Logger.log(moments, message: "Moments: ")
+    }
     
     func nextMoment() -> Moment? {
-
+        
+        // simplify
         let index = momentIndex
         momentIndex += 1
         if momentIndex > moments.count - 1 { momentIndex = 0 }
@@ -33,19 +27,14 @@ class MomentsCoordinator {
         if index <= moments.count - 1 {
             return moments[index]
         }
+        
         return nil
     }
     
-    
     func clear() {
-
         momentIndex = 0
         moments = []
     }
-}
-
-struct Moment {
-    let nodes: [Node]
 }
 
 extension Moment: CustomStringConvertible {
