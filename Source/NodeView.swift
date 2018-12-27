@@ -14,7 +14,7 @@ class NodeView: UIView {
         backgroundColor = .white
     }
     
-    func configure(with metrics: NodeViewMetrics) {
+    func configure(with metrics: ViewMetrics) {
         switch metrics.values {
         
         case .baseNode:

@@ -29,9 +29,7 @@ class StageViewController: UIViewController {
             stageView.topAnchor.constraint(equalTo: view.topAnchor),
             stageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
-        
-        stageView.delegate = stage
-        
+
         stage.run()
     }
 }

@@ -3,7 +3,10 @@ import Foundation
 class NodeController {
     
     var nodes = [Node]()
-    var allNodes: [Node] { return self.nodes }
+    
+    var allNodes: [Node] {
+        return self.nodes
+    }
     
     func clear() {
         self.nodes = []
@@ -47,15 +50,9 @@ class NodeController {
             }
         }
         
-        // kill off nodes not in new moment list
-        for node in nodes {
-            if !newNodes.contains(where: { $0.id == node.id }) {
-                guard let index = index(id: node.id) else {
-                    fatalError("should have index")
-                }
-                
-                self.nodes[index].shouldDie = true
-            }
+        for node in nodes where !newNodes.contains(where: { $0.id == node.id }) {
+            guard let index = index(id: node.id) else { fatalError("should have index") }
+            nodes[index].shouldDie = true
         }
     }
     
@@ -117,8 +114,12 @@ class NodeController {
     }
     
     private func remove(_ node: Node) {
-        guard let index = index(id: node.id) else { return }
+        guard let index = index(id: node.id) else { fatalError("why call with node?") }
         nodes.remove(at: index)
+    }
+    
+    func index(id: String) -> Int? {
+        return nodes.index(where: {  $0.id == id })
     }
 }
 
@@ -126,26 +127,26 @@ class NodeController {
 
 extension NodeController {
     
-    func nodeViewMetrics() -> [NodeViewMetrics] {
+    func nodeViewMetrics() -> [ViewMetrics] {
         return nodes
             .map { $0.id }
             .flatMap(viewMetricsForNode)
     }
     
-    func viewMetricsForNode(id: String) -> NodeViewMetrics? {
+    func viewMetricsForNode(id: String) -> ViewMetrics? {
         
         guard let node = self.node(id: id) else { return nil }
         
         switch node {
             
         case let node as BaseNode:
-            return NodeViewMetrics(
+            return ViewMetrics(
                 id: node.id,
                 values: .baseNode
             )
             
         case let node as ToneNode:
-            return NodeViewMetrics(
+            return ViewMetrics(
                 id: id,
                 values: .toneNode(
                     ToneNodeViewMetrics(
@@ -161,31 +162,26 @@ extension NodeController {
         }
     }
     
-    func nodeAudioMetrics() -> [NodeAudioMetrics] {
+    func nodeAudioMetrics() -> [AudioMetrics] {
         return nodes
             .map { $0.id }
             .flatMap(audioMetricsForNode)
     }
-    
-    
-    func index(id: String) -> Int? {
-        return nodes.index(where: {  $0.id == id })
-    }
-    
-    func audioMetricsForNode(id: String) -> NodeAudioMetrics? {
+
+    func audioMetricsForNode(id: String) -> AudioMetrics? {
         
         guard let node = (nodes.filter { $0.id == id }).first else { return nil }
         
         switch node {
             
         case let node as BaseNode:
-            return NodeAudioMetrics(id: node.id, values: .baseNode)
+            return AudioMetrics(id: node.id, values: .baseNode)
             
         case let node as ToneNode:
             let volume = node.health * node.position.x
             let frequency = node.position.y * 2000
             
-            return NodeAudioMetrics(id: id, values: .ToneNode(ToneNodeAudioMetrics(volume: volume, frequency: frequency)))
+            return AudioMetrics(id: id, values: .ToneNode(ToneNodeAudioMetrics(volume: volume, frequency: frequency)))
             
         default:
             return nil

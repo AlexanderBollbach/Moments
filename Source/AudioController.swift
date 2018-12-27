@@ -1,5 +1,20 @@
 import AVFoundation
 
+struct ToneNodeAudioMetrics {
+    let volume: Double
+    let frequency: Double
+}
+
+enum NodeAudioMetricsValues {
+    case baseNode
+    case ToneNode(ToneNodeAudioMetrics)
+}
+
+struct AudioMetrics {
+    let id: String
+    let values: NodeAudioMetricsValues
+}
+
 class AudioController {
     
     let audioEngine = AVAudioEngine()
@@ -55,7 +70,7 @@ class AudioController {
     }
     
     
-    func addToneGenerator(id: String, completion: (() -> Void)?) {
+    private func addToneGenerator(id: String, then: @escaping () -> Void = {}) {
         
         buildToneGenerator { [unowned self] unit in
             
@@ -77,11 +92,11 @@ class AudioController {
                 )
             )
             
-            completion?()
+            then()
         }
     }
     
-    func buildToneGenerator(completed: @escaping (AVAudioUnit) -> Void) {
+    private func buildToneGenerator(then: @escaping (AVAudioUnit) -> Void) {
         
         let desc = AudioComponentDescription(
             componentType: kAudioUnitType_Generator,
@@ -94,15 +109,15 @@ class AudioController {
         AVAudioUnit.instantiate(with: desc, options: .loadOutOfProcess) { (unit, error) in
             guard error == nil else { fatalError("couldn't instantiate audio unit") }
             unit?.auAudioUnit.maximumFramesToRender = 256
-            completed(unit!)
+            then(unit!)
         }
     }
     
-    func update(with metrics: [NodeAudioMetrics]) {
+    func update(with metrics: [AudioMetrics]) {
  
-        for m in metrics {
-            if !units.contains(where: { unit in unit.id == m.id }) {
-                addToneGenerator(id: m.id, completion: nil)
+        for metric in metrics {
+            if !units.contains(where: { $0.id == metric.id }) {
+                addToneGenerator(id: metric.id)
             }
         }
         

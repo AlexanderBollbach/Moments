@@ -10,6 +10,23 @@ class Stage {
     
     init(stageView: StageView) {
         self.stageView = stageView
+        
+        stageView.onEvent = { [unowned self] event in
+            
+            switch event {
+            
+            case .movedNode(let val):
+                self.updateNode(id: val.id, at: val.position)
+            case .tappedBlankSpace(let position):
+                self.addNode(at: position)
+            case .addMoment:
+                self.addMoment()
+            case .nextMoment:
+                self.nextMoment()
+            case .clearMoments:
+                self.clear()
+            }
+        }
     }
     
     func genID() -> String {
@@ -61,7 +78,6 @@ class Stage {
         }
     }
     
-    
     fileprivate func clear() {
         nodeManager.clear()
     
@@ -72,39 +88,5 @@ class Stage {
     
     private func apply(moment: Moment) {
         nodeManager.apply(moment: moment)
-    }
-}
-
-extension Stage: StageViewDelegate {
-    
-    func interacted(event: StageEvent) {
-        
-        switch event {
-        
-        case .tapped(let position):
-            addNode(at: position)
-            
-        case .moved(let viewMovement):
-            updateNode(id: viewMovement.id, at: viewMovement.position)
-        }
-
-    }
-    
-    func menuButtonTapped(button: MenuButton) {
-        
-        switch button {
-        
-        case .addMoment:
-            addMoment()
-        
-        case .logMoments:
-            momentsCoordinator.logMoments()
-        
-        case .nextMoment:
-            nextMoment()
-        
-        case .clear:
-            clear()
-        }
     }
 }

@@ -12,23 +12,23 @@ class MomentsController {
     func addMoment(nodes: [Node]) {
         moments.append(Moment(nodes: nodes))
     }
-    
-    func logMoments() {
-        Logger.log(moments, message: "Moments: ")
-    }
-    
+   
+    // 'iterator'ish
     func nextMoment() -> Moment? {
         
-        // simplify
         let index = momentIndex
-        momentIndex += 1
-        if momentIndex > moments.count - 1 { momentIndex = 0 }
         
-        if index <= moments.count - 1 {
-            return moments[index]
+        momentIndex += 1
+        
+        if momentIndex > moments.count - 1 {
+            momentIndex = 0
         }
         
-        return nil
+        guard index <= moments.count - 1 else {
+            return nil
+        }
+        
+        return moments[index]
     }
     
     func clear() {

@@ -114,34 +114,3 @@ enum NodeSize {
 }
 
 typealias NodeHealth = Double
-
-struct ToneNodeViewMetrics {
-    let size: NodeSize
-    let position: NodePosition
-    let health: NodeHealth
-}
-
-enum NodeViewMetricsValues {
-    case baseNode
-    case toneNode(ToneNodeViewMetrics)
-}
-
-struct NodeViewMetrics {
-    let id: String
-    let values: NodeViewMetricsValues
-}
-
-struct ToneNodeAudioMetrics {
-    let volume: Double
-    let frequency: Double
-}
-
-enum NodeAudioMetricsValues {
-    case baseNode
-    case ToneNode(ToneNodeAudioMetrics)
-}
-
-struct NodeAudioMetrics {
-    let id: String
-    let values: NodeAudioMetricsValues
-}

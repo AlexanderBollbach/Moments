@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../../frameworks/uikit-kit/uikit-kit.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../../frameworks/node-kit/NodeKitProject.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "container:Moments.xcodeproj">
+   </FileRef>
+</Workspace>
